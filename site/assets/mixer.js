@@ -2,7 +2,7 @@ import "./theme.js"
 import { compose, fileName, licenseSummary, loadData, provenance } from "./compose.js"
 import { drawLogo, fileToLogo } from "./logo.js"
 import { CH, CW, download, serializeMCM } from "./mcm.js"
-import { OsdDemo, putGlyph } from "./osd-demo.js"
+import { OsdDemo, osdLabel, putGlyph } from "./osd-demo.js"
 import { openUploadDialog } from "./upload.js"
 
 const $ = (id) => document.getElementById(id)
@@ -142,12 +142,12 @@ function drawSheet() {
 }
 
 // ---- preview
-const demo = new OsdDemo($("screen"), { craft: $("craft").value })
-$("craft").addEventListener("input", (e) => demo.setCraft(e.target.value))
+const demo = new OsdDemo($("screen"))
 
 function update() {
   current = compose(data, mixOptions())
   origin = provenance(data, mixOptions())
+  demo.setCraft(osdLabel(state.font ? state.font.name : data.iconsetById.get(state.icons).name))
   demo.setFont(current)
   drawSheet()
   drawLogo($("logo-preview"), current)

@@ -6,7 +6,7 @@ import {
   BLACK, CH, CW, GLYPHS, TRANSPARENT, WHITE,
   cloneFont, download, emptyFont, parseH, parseMCM, serializeH, serializeMCM, unpackGlyph,
 } from "./mcm.js"
-import { OsdDemo, putGlyph } from "./osd-demo.js"
+import { OsdDemo, osdLabel, putGlyph } from "./osd-demo.js"
 import { openUploadDialog } from "./upload.js"
 
 const $ = (id) => document.getElementById(id)
@@ -370,6 +370,7 @@ function redrawAll() {
   for (let c = 0; c < GLYPHS; c++) drawCell(c)
   markSheet()
   drawLogo($("logo"), state.font)
+  demo.setCraft(osdLabel((state.name || "").replace(/\.[^.]+$/, "").replace(/-/g, " ")))
   demo.setFont(state.font)
   glyphSel.value = state.current
   $("file-name").textContent = state.name ? `— ${state.name}` : ""
@@ -533,8 +534,7 @@ window.addEventListener("keydown", (e) => {
 })
 
 // ---------- start ----------
-const demo = new OsdDemo($("screen"), { craft: $("craft").value })
-$("craft").addEventListener("input", (e) => demo.setCraft(e.target.value))
+const demo = new OsdDemo($("screen"))
 
 const q = new URLSearchParams(location.search)
 let startMsg = ""

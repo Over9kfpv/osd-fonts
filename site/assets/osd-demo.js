@@ -24,6 +24,34 @@ export function putGlyph(img, glyph, col, row) {
   }
 }
 
+/**
+ * A font's name as it would fit Betaflight's craft name: 15 characters, upper case, only
+ * characters the font replaces. Drops brackets, "font" and version numbers; if it is still too
+ * long, the longest word loses letters one at a time, so sizes like 8X14 stay readable.
+ */
+export function osdLabel(name, max = 15) {
+  const words = (name || "")
+    .toUpperCase()
+    .replace(/\(.*?\)/g, " ")
+    .replace(/_/g, " ")
+    .replace(/[^ -#%-_]/g, "") // printable 0x20-0x5F without '$', the checkered-flag slot
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((w) => w.replace(/^FONTS?(\d+)$/, "$1")) // "Font1" -> "1"
+  let kept = words.filter((w) => !/^(FONTS?|BY|V?\d+(\.\d+)+)$/.test(w))
+  if (!kept.some((w) => /[A-Z]{3}/.test(w))) kept = words // "Font 8x12" keeps its "FONT"
+  const len = () => kept.join(" ").length
+  while (len() > max) {
+    const longest = kept.reduce((a, w, i) => (w.length > kept[a].length ? i : a), 0)
+    if (kept[longest].length <= 3) {
+      kept.pop()
+      continue
+    }
+    kept[longest] = kept[longest].slice(0, -1)
+  }
+  return kept.join(" ") || "OSD FONTS"
+}
+
 export function putText(img, font, s, col, row) {
   for (let i = 0; i < s.length; i++) putGlyph(img, font[s.charCodeAt(i) & 255], col + i, row)
 }
@@ -42,7 +70,7 @@ export function drawSample(canvas, font, lines, bg = "#3a4856") {
 }
 
 export class OsdDemo {
-  constructor(canvas, { craft = "RETRO QUAD" } = {}) {
+  constructor(canvas, { craft = "OSD FONTS" } = {}) {
     this.canvas = canvas
     canvas.width = W
     canvas.height = H

@@ -1,7 +1,7 @@
 import "./theme.js"
 import { compose, fileName, isPublicDomain, loadData } from "./compose.js"
 import { download, serializeMCM } from "./mcm.js"
-import { OsdDemo, drawSample } from "./osd-demo.js"
+import { OsdDemo, drawSample, osdLabel } from "./osd-demo.js"
 
 const $ = (id) => document.getElementById(id)
 const data = await loadData()
@@ -146,8 +146,7 @@ function buildFacets() {
 }
 
 // ---- demo
-const demo = new OsdDemo($("screen"), { craft: $("craft").value })
-$("craft").addEventListener("input", (e) => demo.setCraft(e.target.value))
+const demo = new OsdDemo($("screen"))
 const composed = (font) => compose(data, { font, mode: state.mode, base: state.icons })
 
 // ---- gallery (card previews are drawn as they scroll into view)
@@ -231,6 +230,7 @@ function select(font) {
   sel.value = font.id
   save()
   history.replaceState(null, "", `#${font.id}`)
+  demo.setCraft(osdLabel(font.name))
   demo.setFont(composed(font))
   const mode = font.native ? "native size" : state.mode === "tall" ? "tall" : "1:1"
   $("cap-font").textContent = `${font.name} · ${mode}`

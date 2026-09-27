@@ -8,6 +8,8 @@ import {
   GLYPHS, TRANSPARENT, WHITE, bytesToFont, emptyFont, fontToBytes, parseH, parseMCM, serializeH, serializeMCM,
 } from "../../site/assets/mcm.js"
 import { MSP_OSD_CHAR_WRITE, MspParser, encodeMsp } from "../../site/assets/msp.js"
+globalThis.matchMedia ??= () => ({ matches: false })
+const { osdLabel } = await import("../../site/assets/osd-demo.js")
 
 const root = new URL("../../", import.meta.url)
 const read = (p) => readFileSync(new URL(p, root), "utf8")
@@ -107,4 +109,18 @@ test("license summary: public domain only when letters and every icon source are
   assert.equal(licenseSummary(data, { font: cc0Font, base: "a" }).publicDomain, false)
   assert.equal(licenseSummary(data, { font: cc0Font, base: "b", sources: { battery: "a" } }).publicDomain, false)
   assert.equal(licenseSummary(data, { font: cc0Font, base: "b", sources: { logo: "a" }, logo: [] }).publicDomain, true, "a custom logo replaces set a's logo")
+})
+
+test("OSD label: the font name, shortened to a 15-character craft name", () => {
+  assert.equal(osdLabel("IBM VGA 8x16"), "IBM VGA 8X16")
+  assert.equal(osdLabel("Cozette 1.8.1"), "COZETTE")
+  assert.equal(osdLabel("Arabian Magic Font1"), "ARABIAN MAGIC 1")
+  assert.equal(osdLabel("Font 8x12"), "FONT 8X12")
+  assert.equal(osdLabel("TridentEarly 8x14"), "TRIDENTEAR 8X14", "long words shrink, the size stays")
+  assert.equal(osdLabel("Oldschool (domsson)"), "OLDSCHOOL")
+  assert.equal(osdLabel("Price $9"), "PRICE 9", "no '$': that slot is a symbol")
+  assert.equal(osdLabel(""), "OSD FONTS")
+  for (const name of ["Kaneko Aero Fighters Font 1", "Minimal5x5Monospaced", "4025114973 F260a0378a O"]) {
+    assert.ok(osdLabel(name).length <= 15, name)
+  }
 })
