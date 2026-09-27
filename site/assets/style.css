@@ -234,3 +234,12 @@ footer.site p { margin: 0; max-width: 62ch; }
 .upload-dialog select { width: 100%; font: 15px var(--body); padding: 9px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel-2); color: var(--ink); }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+
+/* phones: logo and theme switch on one line, nav scrolls sideways underneath */
+@media (max-width: 640px) {
+  .top { gap: 8px 12px; padding-block: 10px; }
+  .top .mode { order: 2; margin-left: auto; }
+  .nav { order: 3; flex: 1 1 100%; flex-wrap: nowrap; overflow-x: auto; margin-left: 0; gap: 18px; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { white-space: nowrap; }
+}
