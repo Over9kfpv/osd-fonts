@@ -14,13 +14,12 @@ const state = {
   font: data.fontById.get(q.get("font")) ?? data.fontById.get("ibm-vga-8x16") ?? data.fonts[0],
   mode: q.get("mode") === "small" ? "small" : "tall",
   icons: data.iconsetById.has(q.get("icons")) ? q.get("icons") : "default",
-  logo: q.get("logo") ?? "", // "" = same as icons, iconset id, or "custom"
+  logo: "", // "" = the Betaflight logo every icon set shares, "custom" = uploaded image
   pro: q.get("pro") === "1",
   groups: {}, // groupId -> iconset id ("" = same as icons)
   customLogo: null,
 }
 if (q.get("font") === "none") state.font = null
-if (state.logo === "custom" || (state.logo && !data.iconsetById.has(state.logo))) state.logo = ""
 for (const g of PRO_GROUPS) {
   const v = q.get(`g.${g.id}`)
   if (data.iconsetById.has(v)) state.groups[g.id] = v
@@ -29,7 +28,6 @@ for (const g of PRO_GROUPS) {
 function mixOptions() {
   const sources = {}
   if (state.pro) Object.assign(sources, Object.fromEntries(Object.entries(state.groups).filter(([, v]) => v)))
-  if (state.logo && state.logo !== "custom") sources.logo = state.logo
   return {
     font: state.font,
     mode: state.mode,
@@ -45,7 +43,6 @@ function syncUrl() {
   p.set("font", state.font ? state.font.id : "none")
   if (state.mode !== "tall") p.set("mode", state.mode)
   p.set("icons", state.icons)
-  if (state.logo && state.logo !== "custom") p.set("logo", state.logo)
   if (state.pro) {
     p.set("pro", "1")
     for (const [k, v] of Object.entries(state.groups)) if (v) p.set(`g.${k}`, v)
@@ -76,7 +73,7 @@ const setOptions = (sel, first) => {
   for (const s of data.iconsets) sel.add(new Option(s.name, s.id))
 }
 setOptions($("icons"))
-setOptions($("logo"), "Same as the icons")
+$("logo").add(new Option("Betaflight", ""))
 $("logo").add(new Option("Custom image (288×72)…", "custom"))
 
 const proBox = $("pro-groups")

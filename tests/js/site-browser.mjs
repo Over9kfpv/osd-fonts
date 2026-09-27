@@ -79,11 +79,14 @@ await check("mix: whole set, then per-group Pro mode, share link", async (page) 
   assert.deepEqual(font[0xa0], iconset("bold")[0xa0])
   await page.check("#pro")
   await page.selectOption("#g-battery", "vision")
-  await page.selectOption("#logo", "clarity")
   ;({ font } = await downloadMcm(page, "#download"))
   assert.deepEqual(font[0x90], iconset("vision")[0x90], "battery from Vision")
   assert.deepEqual(font[0x60], iconset("bold")[0x60], "arrows still from Bold")
-  assert.deepEqual(font[0xc0], iconset("clarity")[0xc0], "logo from Clarity")
+  assert.deepEqual(font[0xc0], iconset("default")[0xc0], "Betaflight logo")
+  assert.deepEqual(
+    (await page.locator("#logo option").allTextContents()).map((t) => t.trim()),
+    ["Betaflight", "Custom image (288×72)…"],
+  )
   const url = new URL(page.url())
   assert.equal(url.searchParams.get("g.battery"), "vision")
   // the same link rebuilds the same font
