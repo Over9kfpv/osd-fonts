@@ -10,6 +10,7 @@ const GROUPS = [
   ["featured", "Shortlist"],
   ["pc", "IBM PC ROM"],
   ["vault", "Terminal & game"],
+  ["cc0", "CC0"],
   ["demoscene", "Demoscene"],
   ["all", "All"],
 ]
@@ -66,7 +67,7 @@ $("craft").addEventListener("input", (e) => demo.setCraft(e.target.value))
 
 // ---- gallery (card previews are drawn as they scroll into view)
 const grid = $("grid")
-const COLLECTION = { pc: "IBM PC ROM", vault: "Terminal & game", demoscene: "Demoscene" }
+const COLLECTION = { pc: "IBM PC ROM", vault: "Terminal & game", cc0: "CC0 · OpenGameArt", demoscene: "Demoscene" }
 const lazy = new IntersectionObserver(
   (entries) => {
     for (const e of entries) {

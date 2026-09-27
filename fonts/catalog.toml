@@ -2,12 +2,14 @@
 #
 # id          url-safe identifier (also the .mcm file name)
 # name        display name
-# collection  pc | vault | demoscene
+# collection  pc | vault | cc0 | demoscene
 # format      fon | bdf | outline (pixel TTF/OTB) | sheet (PNG/BMP grid)
 # file        path under fonts/
 # w, h, cols  sheet cell size and glyphs per row (sheets only; cols defaults to image width / w)
 # first       character code of the first cell (sheets, default 0x20)
 # last        last character code to take (default 0x5F; demoscene sheets stop at 'Z')
+# chars       sheets not in ASCII order: the character in each cell, in reading order (space = skip)
+# x0, y0      pixels to skip at the left/top of a sheet before the first cell
 # license, author, url   attribution shown on the site
 # featured    part of the shortlist
 #
@@ -2666,7 +2668,7 @@ w = 8
 h = 8
 cols = 16
 first = 0x00
-license = "CC BY 4.0"
+license = "CC0 1.0"
 author = "pza_siliconf"
 url = "https://opengameart.org/content/squont8ascii"
 featured = false
@@ -2683,5 +2685,556 @@ cols = 16
 license = "CC0 1.0"
 author = "Clint Bellanger"
 url = "https://opengameart.org/content/16x12-terminal-bitmap-font"
+featured = true
+
+
+# ---- CC0 collection: OpenGameArt fonts released under CC0 1.0 ----
+
+[[font]]
+id = "ascii-regular"
+name = "ASCII Regular"
+collection = "cc0"
+format = "sheet"
+file = "cc0/misc/ascii_regular_01.png"
+w = 8
+h = 8
+cols = 16
+license = "CC0 1.0"
+featured = false
+
+[[font]]
+id = "ascii-bold"
+name = "ASCII Bold"
+collection = "cc0"
+format = "sheet"
+file = "cc0/misc/ascii_bold_03.png"
+w = 8
+h = 8
+cols = 16
+license = "CC0 1.0"
+featured = true
+
+[[font]]
+id = "font-8x12"
+name = "Font 8x12"
+collection = "cc0"
+format = "sheet"
+file = "cc0/font-8x12/font.png"
+w = 8
+h = 12
+cols = 16
+license = "CC0 1.0"
+featured = false
+
+[[font]]
+id = "font-5x7"
+name = "Font 5x7"
+collection = "cc0"
+format = "sheet"
+file = "cc0/misc/font-5x7.png"
+w = 5
+h = 7
+cols = 32
+first = 0x00
+license = "CC0 1.0"
+featured = false
+
+[[font]]
+id = "font-8x8-az"
+name = "Font 8x8 A-Z"
+collection = "cc0"
+format = "sheet"
+file = "cc0/misc/font-8x8-az.png"
+w = 8
+h = 8
+cols = 8
+chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-"
+license = "CC0 1.0"
+featured = false
+
+[[font]]
+id = "glyphs-8x8"
+name = "Glyphs 8x8"
+collection = "cc0"
+format = "sheet"
+file = "cc0/misc/glyphs.png"
+w = 8
+h = 8
+cols = 16
+first = 0x00
+license = "CC0 1.0"
+featured = false
+
+[[font]]
+id = "gnsh"
+name = "gnsh bitmap font"
+collection = "cc0"
+format = "sheet"
+file = "cc0/gnsh/gnsh-bitmapfont-colour8.png"
+w = 5
+h = 12
+cols = 20
+license = "CC0 1.0"
+author = "gnsh"
+featured = false
+
+[[font]]
+id = "mbf-big"
+name = "MBF Big"
+collection = "cc0"
+format = "sheet"
+file = "cc0/mbf/mbf_big_00_black_bg.png"
+w = 10
+h = 12
+cols = 16
+first = 0x00
+license = "CC0 1.0"
+featured = true
+
+[[font]]
+id = "mbf-small"
+name = "MBF Small"
+collection = "cc0"
+format = "sheet"
+file = "cc0/mbf/mbf_small_00_black_bg.png"
+w = 7
+h = 7
+cols = 16
+first = 0x00
+license = "CC0 1.0"
+featured = false
+
+[[font]]
+id = "tom-thumb"
+name = "Tom Thumb"
+collection = "cc0"
+format = "sheet"
+file = "cc0/tom-thumb/tom-thumb-new.png"
+w = 4
+h = 6
+cols = 32
+first = 0x00
+license = "CC0 1.0"
+author = "Robey Pointer / Brian Swetland"
+url = "https://opengameart.org/content/tom-thumb-tiny-ascii-font-3x5"
+featured = true
+
+[[font]]
+id = "font0"
+name = "Font0"
+collection = "cc0"
+format = "sheet"
+file = "cc0/misc/font0.gif"
+w = 8
+h = 20
+cols = 32
+chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+license = "CC0 1.0"
+featured = false
+
+[[font]]
+id = "grafx2-expire"
+name = "Expire"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-r2/Expire.png"
+w = 9
+h = 9
+first = 0x21
+license = "CC0 1.0"
+url = "https://opengameart.org/content/the-collection-of-8-bit-fonts-for-grafx2-r2"
+featured = false
+
+[[font]]
+id = "grafx2-formula"
+name = "Formula"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-r2/Formula.png"
+w = 9
+h = 9
+first = 0x21
+license = "CC0 1.0"
+url = "https://opengameart.org/content/the-collection-of-8-bit-fonts-for-grafx2-r2"
+featured = false
+
+[[font]]
+id = "grafx2-hoshi"
+name = "Hoshi"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-r2/Hoshi.png"
+w = 9
+h = 9
+first = 0x21
+license = "CC0 1.0"
+url = "https://opengameart.org/content/the-collection-of-8-bit-fonts-for-grafx2-r2"
+featured = false
+
+[[font]]
+id = "grafx2-kagesans"
+name = "KageSans"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-r2/KageSans.png"
+w = 9
+h = 9
+first = 0x21
+license = "CC0 1.0"
+url = "https://opengameart.org/content/the-collection-of-8-bit-fonts-for-grafx2-r2"
+featured = false
+
+[[font]]
+id = "grafx2-kagestencil"
+name = "KageStencil"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-r2/KageStencil.png"
+w = 9
+h = 9
+first = 0x21
+license = "CC0 1.0"
+url = "https://opengameart.org/content/the-collection-of-8-bit-fonts-for-grafx2-r2"
+featured = false
+
+[[font]]
+id = "grafx2-saikyoscript"
+name = "SaikyoScript"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-r2/SaikyoScript.png"
+w = 9
+h = 9
+first = 0x21
+license = "CC0 1.0"
+url = "https://opengameart.org/content/the-collection-of-8-bit-fonts-for-grafx2-r2"
+featured = false
+
+[[font]]
+id = "grafx2-saikyoserif"
+name = "SaikyoSerif"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-r2/SaikyoSerif.png"
+w = 9
+h = 9
+first = 0x21
+license = "CC0 1.0"
+url = "https://opengameart.org/content/the-collection-of-8-bit-fonts-for-grafx2-r2"
+featured = true
+
+[[font]]
+id = "grafx2-saikyostencil"
+name = "SaikyoStencil"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-r2/SaikyoStencil.png"
+w = 9
+h = 9
+first = 0x21
+license = "CC0 1.0"
+url = "https://opengameart.org/content/the-collection-of-8-bit-fonts-for-grafx2-r2"
+featured = false
+
+[[font]]
+id = "grafx2-moor"
+name = "Moor"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-r2/moor.png"
+w = 9
+h = 9
+first = 0x21
+license = "CC0 1.0"
+url = "https://opengameart.org/content/the-collection-of-8-bit-fonts-for-grafx2-r2"
+featured = false
+
+[[font]]
+id = "grafx2-alchemist"
+name = "Alchemist"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-r2/Alchemist.gif"
+w = 9
+h = 17
+first = 0x21
+license = "CC0 1.0"
+url = "https://opengameart.org/content/the-collection-of-8-bit-fonts-for-grafx2-r2"
+featured = true
+
+[[font]]
+id = "grafx2-techbreaknarrow"
+name = "TechBreakNarrow"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-r2/TechBreakNarrow.gif"
+w = 9
+h = 17
+first = 0x21
+license = "CC0 1.0"
+url = "https://opengameart.org/content/the-collection-of-8-bit-fonts-for-grafx2-r2"
+featured = false
+
+[[font]]
+id = "grafx2-cursive1"
+name = "Cursive1"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-original/Cursive1.png"
+w = 9
+h = 9
+first = 0x21
+x0 = 0
+license = "CC0 1.0"
+url = "https://opengameart.org/content/new-original-grafx2-font-collection"
+featured = false
+
+[[font]]
+id = "grafx2-cursive2"
+name = "Cursive2"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-original/Cursive2.png"
+w = 9
+h = 9
+first = 0x21
+x0 = 0
+license = "CC0 1.0"
+url = "https://opengameart.org/content/new-original-grafx2-font-collection"
+featured = false
+
+[[font]]
+id = "grafx2-techno"
+name = "Techno"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-original/Techno.png"
+w = 9
+h = 9
+first = 0x21
+x0 = 1
+license = "CC0 1.0"
+url = "https://opengameart.org/content/new-original-grafx2-font-collection"
+featured = false
+
+[[font]]
+id = "grafx2-tokyo"
+name = "Tokyo"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-original/Tokyo.png"
+w = 9
+h = 9
+first = 0x21
+x0 = 1
+license = "CC0 1.0"
+url = "https://opengameart.org/content/new-original-grafx2-font-collection"
+featured = false
+
+[[font]]
+id = "grafx2-triodx"
+name = "TrioDX"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-original/TrioDX.png"
+w = 9
+h = 17
+first = 0x21
+x0 = 1
+license = "CC0 1.0"
+url = "https://opengameart.org/content/new-original-grafx2-font-collection"
+featured = true
+
+[[font]]
+id = "grafx2-triodx2"
+name = "TrioDX2"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-original/TrioDX2.png"
+w = 9
+h = 17
+first = 0x21
+x0 = 1
+license = "CC0 1.0"
+url = "https://opengameart.org/content/new-original-grafx2-font-collection"
+featured = false
+
+[[font]]
+id = "grafx2-solar"
+name = "Solar"
+collection = "cc0"
+format = "sheet"
+file = "cc0/grafx2-original/Solar.png"
+w = 9
+h = 9
+first = 0x21
+x0 = 1
+license = "CC0 1.0"
+url = "https://opengameart.org/content/new-original-grafx2-font-collection"
+featured = false
+
+[[font]]
+id = "8x8-artossans-8"
+name = "ArtosSans"
+collection = "cc0"
+format = "bdf"
+file = "cc0/grafx2-8x8-bdf/ArtosSans-8.bdf"
+license = "CC0 1.0"
+url = "https://opengameart.org/content/a-package-of-8-bit-fonts-for-grafx2-and-linux"
+featured = false
+
+[[font]]
+id = "8x8-artosserif-8"
+name = "ArtosSerif"
+collection = "cc0"
+format = "bdf"
+file = "cc0/grafx2-8x8-bdf/ArtosSerif-8.bdf"
+license = "CC0 1.0"
+url = "https://opengameart.org/content/a-package-of-8-bit-fonts-for-grafx2-and-linux"
+featured = false
+
+[[font]]
+id = "8x8-chroma48medium-8"
+name = "Chroma48Medium"
+collection = "cc0"
+format = "bdf"
+file = "cc0/grafx2-8x8-bdf/Chroma48Medium-8.bdf"
+license = "CC0 1.0"
+url = "https://opengameart.org/content/a-package-of-8-bit-fonts-for-grafx2-and-linux"
+featured = false
+
+[[font]]
+id = "8x8-saikyosansbold-8"
+name = "SaikyoSansBold"
+collection = "cc0"
+format = "bdf"
+file = "cc0/grafx2-8x8-bdf/SaikyoSansBold-8.bdf"
+license = "CC0 1.0"
+url = "https://opengameart.org/content/a-package-of-8-bit-fonts-for-grafx2-and-linux"
+featured = false
+
+[[font]]
+id = "8x8-torussansbold-8"
+name = "TorusSansBold"
+collection = "cc0"
+format = "bdf"
+file = "cc0/grafx2-8x8-bdf/TorusSansBold-8.bdf"
+license = "CC0 1.0"
+url = "https://opengameart.org/content/a-package-of-8-bit-fonts-for-grafx2-and-linux"
+featured = false
+
+[[font]]
+id = "8x8-victoriabold-8"
+name = "VictoriaBold"
+collection = "cc0"
+format = "bdf"
+file = "cc0/grafx2-8x8-bdf/VictoriaBold-8.bdf"
+license = "CC0 1.0"
+url = "https://opengameart.org/content/a-package-of-8-bit-fonts-for-grafx2-and-linux"
+featured = true
+
+[[font]]
+id = "8x8-victoriamedium-8"
+name = "VictoriaMedium"
+collection = "cc0"
+format = "bdf"
+file = "cc0/grafx2-8x8-bdf/VictoriaMedium-8.bdf"
+license = "CC0 1.0"
+url = "https://opengameart.org/content/a-package-of-8-bit-fonts-for-grafx2-and-linux"
+featured = false
+
+[[font]]
+id = "kenpixel"
+name = "KenPixel"
+collection = "cc0"
+format = "outline"
+file = "cc0/kenney/kenpixel.ttf"
+license = "CC0 1.0"
+author = "Kenney"
+url = "https://opengameart.org/content/kenney-fonts"
+featured = true
+
+[[font]]
+id = "kenpixel-future"
+name = "KenPixel Future"
+collection = "cc0"
+format = "outline"
+file = "cc0/kenney/kenpixel_future.ttf"
+license = "CC0 1.0"
+author = "Kenney"
+url = "https://opengameart.org/content/kenney-fonts"
+featured = false
+
+[[font]]
+id = "kenpixel-high"
+name = "KenPixel High"
+collection = "cc0"
+format = "outline"
+file = "cc0/kenney/kenpixel_high.ttf"
+license = "CC0 1.0"
+author = "Kenney"
+url = "https://opengameart.org/content/kenney-fonts"
+featured = false
+
+[[font]]
+id = "kenpixel-mini"
+name = "KenPixel Mini"
+collection = "cc0"
+format = "outline"
+file = "cc0/kenney/kenpixel_mini.ttf"
+license = "CC0 1.0"
+author = "Kenney"
+url = "https://opengameart.org/content/kenney-fonts"
+featured = false
+
+[[font]]
+id = "minimal3x5"
+name = "Minimal3x5"
+collection = "cc0"
+format = "outline"
+file = "cc0/minimal/Minimal3x5.ttf"
+license = "CC0 1.0"
+featured = false
+
+[[font]]
+id = "minimal5x5monospaced"
+name = "Minimal5x5Monospaced"
+collection = "cc0"
+format = "outline"
+file = "cc0/minimal/Minimal5x5Monospaced.ttf"
+license = "CC0 1.0"
+featured = false
+
+[[font]]
+id = "minimal5x7"
+name = "Minimal5x7"
+collection = "cc0"
+format = "outline"
+file = "cc0/minimal/Minimal5x7.ttf"
+license = "CC0 1.0"
+featured = false
+
+[[font]]
+id = "public-pixel"
+name = "Public Pixel"
+collection = "cc0"
+format = "outline"
+file = "cc0/public-pixel/PublicPixel.ttf"
+license = "CC0 1.0"
+author = "GGBotNet"
+featured = true
+
+[[font]]
+id = "boxy-bold"
+name = "Boxy Bold"
+collection = "cc0"
+format = "sheet"
+file = "cc0/boxy-bold/boxy_bold_sheet.png"
+w = 8
+h = 8
+cols = 16
+license = "CC0 1.0"
+author = "Clint Bellanger"
+url = "https://opengameart.org/content/boxy-bold-font-split"
 featured = true
 

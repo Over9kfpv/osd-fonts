@@ -8,3 +8,5 @@ node_modules/
 __pycache__/
 .pytest_cache/
 test-results/
+# raw downloads; the fonts used are copied into fonts/cc0/
+opengameartcc0/

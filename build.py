@@ -25,6 +25,7 @@ BASE_URL = "https://over9kfpv.github.io/osd-fonts/"
 COLLECTIONS = {
     "pc": "IBM PC ROM fonts",
     "vault": "Terminal & game fonts",
+    "cc0": "CC0 collection (OpenGameArt)",
     "demoscene": "Demoscene (unknown authors)",
 }
 

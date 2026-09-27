@@ -2,10 +2,11 @@
 
 **Site:** https://over9kfpv.github.io/osd-fonts/
 
-233 retro bitmap fonts, converted for the Betaflight analog OSD (MAX7456, 12×18 characters):
+278 retro bitmap fonts, converted for the Betaflight analog OSD (MAX7456, 12×18 characters):
 
 - **IBM PC ROM fonts** (167): VGA, EGA, CGA, BIOS, Tandy, Amstrad, Toshiba, Compaq…, from VileR's Ultimate Oldschool PC Font Pack
 - **Terminal & game fonts** (24): Terminus, Spleen, unscii, Cozette, GNU Unifont, ZX Spectrum, ProggyClean…
+- **CC0 collection** (45): public-domain fonts from OpenGameArt: GrafX2 fonts, Kenney's KenPixel, Public Pixel, Boxy Bold, Tom Thumb…
 - **Demoscene charsets** (42): C64 and Amiga-era fonts from old archives
 
 The site has four pages:
@@ -32,7 +33,7 @@ The browser builds every `.mcm` itself from the glyph data, so no generated font
 ## Layout
 ```
 fonts/catalog.toml     one [[font]] per font: source file, loader settings, license, author, shortlist
-fonts/{pc,vault,demoscene}/   the source files
+fonts/{pc,vault,cc0,demoscene}/   the source files
 iconsets/*.mcm         Betaflight Configurator fonts (GPL-3.0) used as icon sets
 iconsets/groups.toml   symbol groups for the mixer, from Betaflight's osd_symbols.h
 osdfont/               Python converters (FON, BDF, pixel TTF, sheets) and .mcm I/O

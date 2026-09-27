@@ -26,6 +26,7 @@ Fonts and icon sets are NOT covered by the MIT license; each keeps its own:
 
 - fonts/pc/          The Ultimate Oldschool PC Font Pack by VileR, CC BY-SA 4.0 (fonts/pc/LICENSE.TXT)
 - fonts/vault/<id>/  per-font licenses, listed in each folder's README.md and in fonts/catalog.toml
+- fonts/cc0/         OpenGameArt fonts, CC0 1.0 (public domain); see fonts/cc0/README.md
 - fonts/demoscene/   unknown authors; see fonts/LICENSES.md
 - iconsets/          Betaflight Configurator fonts, GPL-3.0
 

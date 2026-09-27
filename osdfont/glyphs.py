@@ -44,24 +44,33 @@ def legibility(glyphs, reference):
 
 # ---------- loaders ----------
 
-def slice_sheet(on, w, h, cols, first, last):
-    cols = cols or on.shape[1] // w
-    rows = on.shape[0] // h
+def slice_sheet(on, w, h, cols, first, last, chars=None, x0=0, y0=0):
+    """Cut a sheet into cells. Cells run left to right, top to bottom, starting at `first`,
+    unless `chars` gives the character of each cell (a space in `chars` skips that cell)."""
+    cols = cols or (on.shape[1] - x0) // w
+    rows = (on.shape[0] - y0) // h
     glyphs = {}
     for i in range(cols * rows):
-        code = first + i
-        if code > last:
-            break
-        if code < FIRST:
+        if chars is not None:
+            if i >= len(chars):
+                break
+            if chars[i] == " ":
+                continue
+            code = ord(chars[i])
+        else:
+            code = first + i
+            if code > last:
+                break
+        if code < FIRST or code > last:
             continue  # control-character slots would overwrite Betaflight symbols
-        x, y = (i % cols) * w, (i // cols) * h
+        x, y = x0 + (i % cols) * w, y0 + (i // cols) * h
         g = on[y:y + h, x:x + w]
         if g.shape == (h, w) and (g.any() or code == FIRST):
             glyphs[code] = g
     return glyphs
 
 
-def load_sheet(path, w, h, cols, first, last, reference):
+def load_sheet(path, w, h, cols, first, last, reference, chars=None, x0=0, y0=0):
     """Slice a PNG/BMP sheet. Multicolour sheets carry shadows, grids and gradients, so every
     luminance cutoff is tried and the one whose letters best match the stock shapes wins."""
     src = Image.open(path).convert("RGBA")
@@ -74,7 +83,7 @@ def load_sheet(path, w, h, cols, first, last, reference):
     lum = im @ [299, 587, 114] // 1000
     best = None
     for cut in np.unique(lum[ink]):
-        glyphs = slice_sheet(ink & (lum >= cut), w, h, cols, first, last)
+        glyphs = slice_sheet(ink & (lum >= cut), w, h, cols, first, last, chars, x0, y0)
         score = legibility(glyphs, reference)
         if best is None or score > best[0] + 0.01:  # prefer the most inclusive cutoff on ties
             best = (score, glyphs)
@@ -88,7 +97,7 @@ def load_source(entry, root, reference):
     fmt = entry["format"]
     if fmt == "sheet":
         glyphs = load_sheet(path, entry["w"], entry["h"], entry.get("cols"), entry.get("first", FIRST),
-                            last, reference)
+                            last, reference, entry.get("chars"), entry.get("x0", 0), entry.get("y0", 0))
     else:
         if fmt == "fon":
             glyphs = read_fon(path)[0]["glyphs"]
