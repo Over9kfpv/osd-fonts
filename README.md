@@ -14,7 +14,7 @@ The site has four pages:
 
 | Page | What it does |
 |---|---|
-| **Browse** (`index.html`) | Every font on a simulated FPV feed; filter, search, download `.mcm` with stock icons |
+| **Browse** (`index.html`) | Every font on a simulated FPV feed. Filter by letter size, stroke weight, license and source (measured from the glyphs by `osdfont/traits.py`, no hand tagging); near-identical fonts share a card with "+N look-alikes"; download `.mcm` with Betaflight or CC0 icons |
 | **Mix** (`mix.html`) | Letters from one font, symbols from an icon set, and the Betaflight logo or your own 288×72 image. **Pro** picks icons per group: battery, signal, horizon, arrows, units, bars. The mix lives in the URL, so links can be shared |
 | **Editor** (`editor.html`) | Pixel editor for any `.mcm`/`.h`: pencil, line, rect, fill, shift, invert, copy/paste, undo, composition mode (edit several characters as one picture), tracing overlay, logo BMP import/export, autosave |
 | **Install** (`install.html`) | Flashing with Configurator's Font Manager, or straight from the browser |

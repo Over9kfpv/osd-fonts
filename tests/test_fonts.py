@@ -152,3 +152,18 @@ def test_cc0_iconset_is_current_and_original():
     blank = np.full((CH, CW), 1, np.uint8).tobytes()
     copied = [hex(c) for c, g in enumerate(saved) if c not in text and g.tobytes() != blank and g.tobytes() in betaflight]
     assert not copied, f"these CC0 symbols equal a Betaflight glyph: {copied}"
+
+
+def test_traits_classify_known_fonts(loaded):
+    from osdfont.traits import describe, license_group
+
+    stock, fonts = loaded
+    traits = {e["id"]: t for (e, _, _), t in zip(fonts, describe(fonts))}
+    assert traits["ibm-vga-9x16"]["family"] == traits["ibm-vga-8x16"]["family"] == "ibm-vga-8x16"
+    assert traits["ibm-vga-8x16"]["familyLead"] and traits["ibm-vga-8x16"]["familySize"] >= 5
+    assert traits["tom-thumb"]["sizeClass"] == "tiny"
+    assert traits["ibm-vga-8x16"]["sizeClass"] in ("medium", "large")
+    assert traits["ucs-fonts"]["weight"] == "thin"
+    assert traits["ibm-vga-8x16"]["weight"] == "bold"
+    assert [license_group(l) for l in ("CC0 1.0", "Public domain", "MIT", "CC BY-SA 4.0", "GPL-3.0", "Unknown")] == \
+        ["public-domain", "public-domain", "credit", "share-alike", "share-alike", "unknown"]

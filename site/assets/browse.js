@@ -6,16 +6,31 @@ import { OsdDemo, drawSample } from "./osd-demo.js"
 const $ = (id) => document.getElementById(id)
 const data = await loadData()
 const fonts = data.fonts
-const GROUPS = [
-  ["featured", "Shortlist"],
-  ["pc", "IBM PC ROM"],
-  ["vault", "Terminal & game"],
-  ["cc0", "CC0"],
-  ["demoscene", "Demoscene"],
-  ["all", "All"],
+
+// ---- facets: every value is measured from the glyphs at build time (osdfont/traits.py)
+const FACETS = [
+  { key: "size", label: "Letter size", field: "sizeClass", values: [
+    ["tiny", "Tiny", "5–6 px"], ["small", "Small", "7–8 px"], ["medium", "Medium", "9–11 px"], ["large", "Large", "12+ px"]] },
+  { key: "weight", label: "Stroke", field: "weight", values: [
+    ["thin", "Thin", "1 px"], ["bold", "Bold", "2 px"], ["heavy", "Heavy", "3 px+"]] },
+  { key: "license", label: "License", field: "licenseGroup", values: [
+    ["public-domain", "Public domain"], ["credit", "Free, with credit"], ["share-alike", "Share-alike"], ["unknown", "Unknown"]] },
+  { key: "source", label: "Source", field: "collection", values: [
+    ["pc", "IBM PC ROM"], ["vault", "Terminal & game"], ["cc0", "OpenGameArt"], ["demoscene", "Demoscene"]] },
 ]
-const inGroupOf = (g, f) => g === "all" || (g === "featured" ? f.featured : f.collection === g)
-const state = { font: data.fontById.get("ibm-vga-8x16") ?? fonts[0], mode: "small", sort: "score", group: "featured", q: "", icons: "default" }
+const SOURCE = { pc: "IBM PC ROM", vault: "Terminal & game", cc0: "CC0 · OpenGameArt", demoscene: "Demoscene" }
+
+const state = {
+  font: data.fontById.get("ibm-vga-8x16") ?? fonts[0],
+  mode: "small",
+  icons: "default",
+  sort: "score",
+  picks: true,
+  groupAlike: true,
+  family: null,
+  q: "",
+  filters: Object.fromEntries(FACETS.map((f) => [f.key, new Set()])),
+}
 
 try {
   const saved = JSON.parse(localStorage.getItem("osdfonts.browse") || "{}")
@@ -23,52 +38,120 @@ try {
   if (saved.mode === "tall") state.mode = "tall"
   if (saved.sort === "name") state.sort = "name"
   if (data.iconsetById.has(saved.icons)) state.icons = saved.icons
-  if (GROUPS.some(([g]) => g === saved.group)) state.group = saved.group
+  if (typeof saved.picks === "boolean") state.picks = saved.picks
+  if (typeof saved.groupAlike === "boolean") state.groupAlike = saved.groupAlike
+  for (const f of FACETS) for (const v of saved.filters?.[f.key] ?? []) if (f.values.some(([x]) => x === v)) state.filters[f.key].add(v)
 } catch {}
 const deepLink = decodeURIComponent(location.hash.slice(1)) || new URLSearchParams(location.search).get("font")
 if (data.fontById.has(deepLink)) {
   state.font = data.fontById.get(deepLink)
-  if (!inGroupOf(state.group, state.font)) state.group = "all"
+  if (!state.font.featured) state.picks = false
 }
+
 const save = () => {
   try {
-    localStorage.setItem("osdfonts.browse", JSON.stringify({ font: state.font.id, mode: state.mode, sort: state.sort, group: state.group, icons: state.icons }))
+    localStorage.setItem("osdfonts.browse", JSON.stringify({
+      font: state.font.id, mode: state.mode, sort: state.sort, icons: state.icons, picks: state.picks,
+      groupAlike: state.groupAlike, filters: Object.fromEntries(FACETS.map((f) => [f.key, [...state.filters[f.key]]])),
+    }))
   } catch {}
 }
 
-const composed = (font) => compose(data, { font, mode: state.mode, base: state.icons })
-const matches = (f) => !state.q || `${f.name} ${f.id} ${f.author ?? ""}`.toLowerCase().includes(state.q)
-const ordered = () =>
-  fonts
-    .filter((f) => inGroupOf(state.group, f) && matches(f))
-    .sort(state.sort === "name" ? (a, b) => a.name.localeCompare(b.name) : (a, b) => b.score - a.score)
+// ---- filtering
+const matchesSearch = (f) => !state.q || `${f.name} ${f.id} ${f.author ?? ""} ${f.license}`.toLowerCase().includes(state.q)
+function passes(f, skip = null) {
+  if (state.picks && !f.featured) return false
+  if (state.family && f.family !== state.family) return false
+  if (!matchesSearch(f)) return false
+  for (const facet of FACETS) {
+    if (facet.key === skip) continue
+    const set = state.filters[facet.key]
+    if (set.size && !set.has(f[facet.field])) return false
+  }
+  return true
+}
+const bySort = (a, b) => (state.sort === "name" ? a.name.localeCompare(b.name) : b.score - a.score || a.name.localeCompare(b.name))
+const matching = () => fonts.filter((f) => passes(f)).sort(bySort)
 
-$("n-fonts").textContent = fonts.length
+/** Cards to show: one per family unless grouping is off or one family is open. */
+function cards() {
+  const list = matching()
+  if (!state.groupAlike || state.family) return list.map((f) => ({ font: f, alike: 0 }))
+  const byFamily = new Map()
+  for (const f of list) {
+    const entry = byFamily.get(f.family)
+    if (!entry) byFamily.set(f.family, { font: f, alike: 0 })
+    else {
+      entry.alike++
+      if (f.familyLead) entry.font = f // show the family's namesake when it passes the filters
+    }
+  }
+  return [...byFamily.values()]
+}
 
-// ---- collection chips
-const chips = $("groups")
-for (const [g, label] of GROUPS) {
+// ---- facet chips with live counts
+const facetsEl = $("facets")
+function chip(label, count, pressed, onClick, hint = "") {
   const b = document.createElement("button")
   b.type = "button"
   b.className = "chip"
-  b.dataset.group = g
-  b.innerHTML = `${label}<span class="n">${fonts.filter((f) => inGroupOf(g, f)).length}</span>`
-  b.addEventListener("click", () => {
-    state.group = g
-    save()
-    refreshList()
-  })
-  chips.append(b)
+  b.setAttribute("aria-pressed", pressed)
+  b.innerHTML = `${label}${hint ? `<span class="hint">(${hint})</span>` : ""}${count === null ? "" : `<span class="n">${count}</span>`}`
+  b.onclick = onClick
+  return b
 }
-const markChips = () => chips.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", c.dataset.group === state.group))
+function facetRow(label) {
+  const row = document.createElement("div")
+  row.className = "facet"
+  row.innerHTML = `<span class="label"></span><div class="chips" role="group"></div>`
+  row.querySelector(".label").textContent = label
+  row.querySelector(".chips").setAttribute("aria-label", label)
+  facetsEl.append(row)
+  return row.querySelector(".chips")
+}
+function buildFacets() {
+  facetsEl.textContent = ""
+  const show = facetRow("Show")
+  for (const [picks, label] of [[true, "Our picks"], [false, "All fonts"]]) {
+    const n = fonts.filter((f) => !picks || f.featured).length
+    show.append(chip(label, n, state.picks === picks, () => {
+      state.picks = picks
+      refresh()
+    }))
+  }
+  if (state.family) {
+    const lead = data.fontById.get(state.family)
+    const b = chip(`Look-alikes of ${lead.name} ✕`, null, true, () => {
+      state.family = null
+      refresh()
+    })
+    b.setAttribute("aria-label", `Stop showing look-alikes of ${lead.name}`)
+    show.append(b)
+  }
+  for (const facet of FACETS) {
+    const row = facetRow(facet.label)
+    const pool = fonts.filter((f) => passes(f, facet.key))
+    for (const [value, label, hint] of facet.values) {
+      const n = pool.filter((f) => f[facet.field] === value).length
+      const on = state.filters[facet.key].has(value)
+      const b = chip(label, n, on, () => {
+        on ? state.filters[facet.key].delete(value) : state.filters[facet.key].add(value)
+        refresh()
+      }, hint)
+      b.disabled = !n && !on
+      row.append(b)
+    }
+  }
+  $("clear").hidden = !(FACETS.some((f) => state.filters[f.key].size) || state.q || state.family)
+}
 
 // ---- demo
 const demo = new OsdDemo($("screen"), { craft: $("craft").value })
 $("craft").addEventListener("input", (e) => demo.setCraft(e.target.value))
+const composed = (font) => compose(data, { font, mode: state.mode, base: state.icons })
 
 // ---- gallery (card previews are drawn as they scroll into view)
 const grid = $("grid")
-const COLLECTION = { pc: "IBM PC ROM", vault: "Terminal & game", cc0: "CC0 · OpenGameArt", demoscene: "Demoscene" }
 const lazy = new IntersectionObserver(
   (entries) => {
     for (const e of entries) {
@@ -83,48 +166,62 @@ const lazy = new IntersectionObserver(
 function buildGrid() {
   grid.textContent = ""
   lazy.disconnect()
-  const list = ordered()
-  for (const font of list) {
-    const b = document.createElement("button")
-    b.type = "button"
-    b.className = "card"
-    b.dataset.id = font.id
-    b.dataset.collection = font.collection
+  const list = cards()
+  for (const { font, alike } of list) {
+    const card = document.createElement("article")
+    card.className = "card"
+    card.dataset.id = font.id
+    card.dataset.collection = font.collection
     const partial = Object.keys(font.glyphs).length < 45
-    b.innerHTML = `
-      <div class="card-label"><span class="cat"></span><canvas width="156" height="54"></canvas></div>
-      <div class="card-body">
-        <h3></h3>
-        <p class="by"></p>
-        <div class="card-foot"><span class="open">Try it on the OSD →</span><span class="dl">${font.size}${partial ? " · partial" : ""}</span></div>
+    card.innerHTML = `
+      <button type="button" class="card-main">
+        <span class="card-label"><span class="cat"></span><canvas width="156" height="54"></canvas></span>
+        <span class="card-body"><span class="h3"></span><span class="by"></span></span>
+      </button>
+      <div class="card-foot">
+        ${alike ? `<button type="button" class="alike">+${alike} look-alike${alike > 1 ? "s" : ""}</button>` : `<span class="open">Try it on the OSD →</span>`}
+        <span class="dl">${font.height} px · ${font.weight}${partial ? " · partial" : ""}</span>
       </div>`
-    b.querySelector(".cat").textContent = COLLECTION[font.collection]
-    b.querySelector("h3").textContent = font.name
-    b.querySelector(".by").textContent = [font.author, font.license].filter(Boolean).join(" · ")
-    b.addEventListener("click", () => {
+    card.querySelector(".cat").textContent = SOURCE[font.collection]
+    card.querySelector(".h3").textContent = font.name
+    card.querySelector(".by").textContent = [font.author, font.license].filter(Boolean).join(" · ")
+    const main = card.querySelector(".card-main")
+    main.setAttribute("aria-label", `Try ${font.name} on the OSD`)
+    main.addEventListener("click", () => {
       select(font)
       document.querySelector(".goggle").scrollIntoView({ behavior: demo.reduced ? "auto" : "smooth", block: "center" })
     })
-    grid.append(b)
-    lazy.observe(b)
+    card.querySelector(".alike")?.addEventListener("click", () => {
+      state.family = font.family
+      refresh()
+      document.getElementById("fonts").scrollIntoView({ behavior: demo.reduced ? "auto" : "smooth" })
+    })
+    grid.append(card)
+    lazy.observe(card)
   }
-  $("g-count").textContent = list.length ? `${list.length} fonts. Letters only; every OSD symbol stays intact.` : ""
-  if (!list.length) grid.innerHTML = '<p class="empty">No fonts match. Try another collection or search term.</p>'
+  const n = matching().length
+  $("g-count").textContent = !n
+    ? ""
+    : list.length < n
+      ? `${n} fonts on ${list.length} cards: near-identical fonts share a card.`
+      : `${n} font${n > 1 ? "s" : ""}. Letters only; every OSD symbol stays intact.`
+  if (!list.length) grid.innerHTML = '<p class="empty">No fonts match. Remove a filter or switch to All fonts.</p>'
   markCurrent()
 }
 const markCurrent = () => grid.querySelectorAll(".card").forEach((c) => c.setAttribute("aria-current", c.dataset.id === state.font.id))
 
-// ---- controls
+// ---- demo controls
 const sel = $("font")
 function fillSelect() {
   sel.textContent = ""
-  const list = ordered()
+  const list = matching()
   if (!list.includes(state.font)) list.unshift(state.font)
   for (const f of list) sel.add(new Option(f.name, f.id))
   sel.value = state.font.id
 }
-function refreshList() {
-  markChips()
+function refresh() {
+  save()
+  buildFacets()
   fillSelect()
   buildGrid()
 }
@@ -159,8 +256,7 @@ function setSort(sort) {
   state.sort = sort
   $("sort-score").setAttribute("aria-pressed", sort === "score")
   $("sort-name").setAttribute("aria-pressed", sort === "name")
-  save()
-  refreshList()
+  refresh()
 }
 
 for (const s of data.iconsets) $("icons").add(new Option(s.name + (isPublicDomain(s.license) ? " (public domain)" : ""), s.id))
@@ -173,7 +269,7 @@ $("icons").addEventListener("change", (e) => {
 })
 sel.addEventListener("change", () => select(data.fontById.get(sel.value)))
 const step = (d) => {
-  const list = ordered()
+  const list = matching()
   if (!list.length) return
   const i = list.indexOf(state.font)
   select(list[(i + d + list.length) % list.length])
@@ -186,18 +282,31 @@ $("sort-score").addEventListener("click", () => setSort("score"))
 $("sort-name").addEventListener("click", () => setSort("name"))
 $("search").addEventListener("input", (e) => {
   state.q = e.target.value.trim().toLowerCase()
-  fillSelect()
-  buildGrid()
+  if (state.q) state.picks = false // searching looks through everything
+  refresh()
+})
+$("group-alike").checked = state.groupAlike
+$("group-alike").addEventListener("change", (e) => {
+  state.groupAlike = e.target.checked
+  refresh()
+})
+$("clear").addEventListener("click", () => {
+  for (const f of FACETS) state.filters[f.key].clear()
+  state.family = null
+  state.q = ""
+  $("search").value = ""
+  refresh()
 })
 $("download").addEventListener("click", () => {
   const suffix = (state.font.native || state.mode === "small" ? "" : "-tall") + (state.icons === "default" ? "" : `-${state.icons}`)
   download(`${fileName(state.font.id)}${suffix}.mcm`, serializeMCM(composed(state.font)))
 })
 
+$("n-fonts").textContent = fonts.length
 $("mode-small").setAttribute("aria-pressed", state.mode === "small")
 $("mode-tall").setAttribute("aria-pressed", state.mode === "tall")
 $("sort-score").setAttribute("aria-pressed", state.sort === "score")
 $("sort-name").setAttribute("aria-pressed", state.sort === "name")
-refreshList()
+refresh()
 select(state.font)
 demo.start()

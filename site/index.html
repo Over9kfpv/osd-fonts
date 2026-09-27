@@ -74,16 +74,20 @@
   <section id="fonts">
     <div class="section-head">
       <h2>Pick a retro font</h2>
-      <div class="filters" id="groups" role="group" aria-label="Collection"></div>
-    </div>
-    <div class="tools-row">
-      <p class="note" id="g-count"></p>
       <div class="row">
         <label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input type="search" id="search" placeholder="VGA, Tandy, Terminus…" autocomplete="off" aria-label="Search fonts"></label>
         <div class="seg" role="group" aria-label="Sort">
           <button type="button" id="sort-score" aria-pressed="true">Best match</button>
           <button type="button" id="sort-name" aria-pressed="false">A–Z</button>
         </div>
+      </div>
+    </div>
+    <div class="facets" id="facets"></div>
+    <div class="tools-row">
+      <p class="note" id="g-count"></p>
+      <div class="row">
+        <label class="switch"><input type="checkbox" id="group-alike" checked> Group look-alikes</label>
+        <button type="button" class="btn ghost small" id="clear" hidden>Clear filters</button>
       </div>
     </div>
     <div class="grid" id="grid"></div>

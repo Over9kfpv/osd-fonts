@@ -17,6 +17,7 @@ from PIL import Image
 
 from osdfont.glyphs import (build_font, fingerprint, fits, is_native, legibility, load_source,
                             reference_shapes, size_of)
+from osdfont.traits import describe
 from osdfont.mcm import BLACK, CH, CW, GLYPHS, TRANSPARENT, WHITE, pack, read_mcm
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -170,7 +171,8 @@ def main():
     os.makedirs(os.path.join(SITE, "data"), exist_ok=True)
     os.makedirs(os.path.join(SITE, "f"), exist_ok=True)
     out_fonts = []
-    for e, glyphs, score in fonts:
+    traits = describe(fonts)
+    for (e, glyphs, score), t in zip(fonts, traits):
         native = is_native(glyphs)
         w, h = size_of(glyphs)
         chars = build_font(glyphs, stock, "small")
@@ -183,6 +185,7 @@ def main():
             "license": e["license"], "author": e.get("author"), "url": e.get("url"),
             "featured": e.get("featured", False), "size": f"{w}x{h}", "native": bool(native),
             "score": round(float(score), 3),
+            **t,
             "glyphs": {str(c): ["".join("1" if p else "0" for p in row) for row in g] for c, g in glyphs.items()},
         })
     with open(os.path.join(SITE, "data", "fonts.json"), "w") as f:

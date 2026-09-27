@@ -53,17 +53,32 @@ async function check(name, fn) {
   }
 }
 
-await check("browse: gallery, demo and download", async (page) => {
+await check("browse: gallery, facets, look-alikes, demo and download", async (page) => {
   await page.goto(base + "index.html")
   await page.waitForSelector("#grid .card")
   assert.match(await page.textContent("#cap-font"), /IBM VGA 8x16/)
   assert.equal(await page.getAttribute("#mode-small", "aria-pressed"), "true", "1:1 centred is the default")
-  const cards = await page.locator("#grid .card").count()
-  assert.ok(cards >= 30, `shortlist has ${cards} cards`)
-  await page.click('#groups .chip[data-group="all"]')
-  assert.ok((await page.locator("#grid .card").count()) >= 200)
+  const picks = await page.locator("#grid .card").count()
+  assert.ok(picks >= 30, `picks show ${picks} cards`)
+  const facet = (label, value) => page.locator(".facet", { has: page.locator(".label", { hasText: label }) }).locator(".chip", { hasText: value })
+  await facet("Show", "All fonts").click()
+  const all = await page.locator("#grid .card").count()
+  assert.ok(all >= 150 && all < 278, `look-alikes share cards: ${all} cards for 278 fonts`)
+  // a facet narrows the list, and its count matches the cards shown when grouping is off
+  await page.uncheck("#group-alike")
+  const tinyCount = Number(await facet("Letter size", "Tiny").locator(".n").textContent())
+  await facet("Letter size", "Tiny").click()
+  assert.equal(await page.locator("#grid .card").count(), tinyCount)
+  await page.click("#clear")
+  await page.check("#group-alike")
+  // the IBM VGA family opens into its look-alikes
+  const vga = page.locator('#grid .card[data-id="ibm-vga-8x16"]')
+  await vga.locator(".alike").click()
+  assert.ok((await page.locator("#grid .card").count()) >= 5, "VGA look-alikes listed")
+  assert.match(await page.textContent(".facets"), /Look-alikes of IBM VGA 8x16/)
+  await page.click("#clear")
   await page.fill("#search", "terminus")
-  await page.locator("#grid .card").first().click()
+  await page.locator("#grid .card .card-main").first().click()
   assert.match(await page.textContent("#cap-font"), /Terminus/)
   const { name, font } = await downloadMcm(page, "#download")
   assert.equal(name, "terminus.mcm")
