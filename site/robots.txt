@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://over9kfpv.github.io/osd-fonts/sitemap.xml

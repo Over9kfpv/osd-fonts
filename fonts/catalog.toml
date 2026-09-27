@@ -1,0 +1,2687 @@
+# Font catalog: one [[font]] per font. This file is the source of truth for build.py.
+#
+# id          url-safe identifier (also the .mcm file name)
+# name        display name
+# collection  pc | vault | demoscene
+# format      fon | bdf | outline (pixel TTF/OTB) | sheet (PNG/BMP grid)
+# file        path under fonts/
+# w, h, cols  sheet cell size and glyphs per row (sheets only; cols defaults to image width / w)
+# first       character code of the first cell (sheets, default 0x20)
+# last        last character code to take (default 0x5F; demoscene sheets stop at 'Z')
+# license, author, url   attribution shown on the site
+# featured    part of the shortlist
+#
+# Skipped while migrating: 08X08-F3 (striped overlay), HT-DNXFT (non-ASCII order),
+# SEGA Afterburner 4 and bloxxit (glyphs are solid tiles), Matrix Sans Screen (11px wide),
+# Vircon32 CAD sheets (framed cells), fonts too big for 12x18, and exact duplicates.
+
+[[font]]
+id = "08x08-f1"
+name = "08x08 F1"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/08X08-F1.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "08x08-f2"
+name = "08x08 F2"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/08X08-F2.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "08x08-f4"
+name = "08x08 F4"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/08X08-F4.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "08x08-f5"
+name = "08x08 F5"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/08X08-F5.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = true
+
+[[font]]
+id = "08x08-f6"
+name = "08x08 F6"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/08X08-F6.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "4025114973-f260a0378a-o"
+name = "4025114973 F260a0378a O"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/4025114973_f260a0378a_o.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "4025114979-822411da3b-o"
+name = "4025114979 822411da3b O"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/4025114979_822411da3b_o.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "4025115017-2a68c33387-o"
+name = "4025115017 2a68c33387 O"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/4025115017_2a68c33387_o.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "4025115037-265f2ae1c4-o"
+name = "4025115037 265f2ae1c4 O"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/4025115037_265f2ae1c4_o.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "4025866212-5e60e9be9a-o"
+name = "4025866212 5e60e9be9a O"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/4025866212_5e60e9be9a_o.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "sega-afterburner-font-1"
+name = "Sega Afterburner Font 1"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS-SEGA Afterburner Font 1.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = true
+
+[[font]]
+id = "1color-pyrotechnics-font"
+name = "1color Pyrotechnics Font"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_1Color Pyrotechnics Font.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "alcatraz-tony-font-1"
+name = "Alcatraz Tony Font 1"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Alcatraz Tony Font 1.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "alcatraz-tony-font-2"
+name = "Alcatraz Tony Font 2"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Alcatraz Tony Font 2.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "analog-font-1"
+name = "Analog Font 1"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Analog Font 1.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = true
+
+[[font]]
+id = "andromeda-font-4"
+name = "Andromeda Font 4"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Andromeda Font 4.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "arabian-magic-font1"
+name = "Arabian Magic Font1"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Arabian Magic Font1.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "arkarea-font1"
+name = "Arkarea Font1"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_ArkArea Font1.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "arkarea-font4"
+name = "Arkarea Font4"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_ArkArea Font4.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "arkarea-font5"
+name = "Arkarea Font5"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_ArkArea Font5.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "art-of-fighting2-font-1"
+name = "Art Of Fighting2 Font 1"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Art of Fighting2 Font 1.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = true
+
+[[font]]
+id = "art-of-fighting2-font-4"
+name = "Art Of Fighting2 Font 4"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Art of Fighting2 Font 4.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "aura-font"
+name = "Aura Font"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Aura Font.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "balance-font"
+name = "Balance Font"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Balance Font.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "cougar-font"
+name = "Cougar Font"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_CougaR Font.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "devils-font"
+name = "Devils Font"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Devils Font.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "dexion-natrix-font-1"
+name = "Dexion Natrix Font 1"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Dexion_Natrix Font 1.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "dual-crew-font-1"
+name = "Dual Crew Font 1"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Dual Crew Font 1.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "game-font-1"
+name = "Game Font 1"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Game Font 1.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "kaneko-aero-fighters-font-1"
+name = "Kaneko Aero Fighters Font 1"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Kaneko Aero Fighters Font 1.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = true
+
+[[font]]
+id = "oxygene-font"
+name = "Oxygene Font"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Oxygene Font.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "slaine-cadre-font"
+name = "Slaine Cadre Font"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Slaine-Cadre Font.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "slaine-cadre-invers-font"
+name = "Slaine Cadre Invers Font"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_Slaine-Cadre Invers Font.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "tsb-pack-font"
+name = "Tsb Pack Font"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/Charset-DNS_TSB-Pack Font.png"
+w = 8
+h = 8
+cols = 40
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "nfo-font-6x8"
+name = "Nfo Font 6x8"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/nfo-font_6x8.png"
+w = 6
+h = 8
+last = 0x5A
+license = "Unknown"
+featured = true
+
+[[font]]
+id = "simple-6x8"
+name = "Simple 6x8"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/simple_6x8.png"
+w = 6
+h = 8
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "verifier-font-8x8"
+name = "Verifier Font 8x8"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/verifier_font_8x8.png"
+w = 8
+h = 8
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "geebeeyay-8x8"
+name = "Geebeeyay 8x8"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/geebeeyay-8x8.png"
+w = 8
+h = 8
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "bubblemad-8x8"
+name = "Bubblemad 8x8"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/bubblemad_8x8.png"
+w = 8
+h = 8
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "anuvverbubbla-8x8"
+name = "Anuvverbubbla 8x8"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/anuvverbubbla_8x8.png"
+w = 8
+h = 8
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "gold-8x8"
+name = "Gold 8x8"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/gold_8x8.png"
+w = 8
+h = 8
+first = 0x41
+last = 0x5A
+license = "Unknown"
+featured = false
+
+[[font]]
+id = "amigarom"
+name = "Amigarom"
+collection = "demoscene"
+format = "sheet"
+file = "demoscene/AMIGAROM.png"
+w = 8
+h = 16
+last = 0x5A
+license = "Unknown"
+featured = true
+
+[[font]]
+id = "ibm-3270pc"
+name = "IBM 3270pc"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_3270pc.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "ibm-bios"
+name = "IBM BIOS"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_BIOS.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "ibm-cga"
+name = "IBM CGA"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_CGA.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "ibm-cgathin"
+name = "IBM CGAthin"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_CGAthin.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "ibm-conv"
+name = "IBM Conv"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_Conv.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ibm-dos-iso8"
+name = "IBM DOS ISO8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_DOS_ISO8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ibm-ega-8x14"
+name = "IBM EGA 8x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_EGA_8x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "ibm-ega-9x14"
+name = "IBM EGA 9x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_EGA_9x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ibm-mda"
+name = "IBM MDA"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_MDA.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "ibm-model30r0"
+name = "IBM Model30r0"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_Model30r0.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ibm-model3x-alt1"
+name = "IBM Model3x Alt1"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_Model3x_Alt1.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ibm-model3x-alt2"
+name = "IBM Model3x Alt2"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_Model3x_Alt2.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ibm-model3x-alt3"
+name = "IBM Model3x Alt3"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_Model3x_Alt3.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ibm-model3x-alt4"
+name = "IBM Model3x Alt4"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_Model3x_Alt4.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ibm-vga-8x16"
+name = "IBM VGA 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_VGA_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "ibm-vga-9x16"
+name = "IBM VGA 9x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_VGA_9x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ibm-xga-ai-7x15"
+name = "IBM XGA-AI 7x15"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IBM_XGA-AI_7x15.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "acm-vga-8x14"
+name = "ACM VGA 8x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ACM_VGA_8x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "acm-vga-8x16"
+name = "ACM VGA 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ACM_VGA_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "acm-vga-8x8"
+name = "ACM VGA 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ACM_VGA_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ami-ega-8x14"
+name = "AMI EGA 8x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_AMI_EGA_8x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ami-ega-8x8"
+name = "AMI EGA 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_AMI_EGA_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ami-ega-9x14"
+name = "AMI EGA 9x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_AMI_EGA_9x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ast-premiumexec"
+name = "AST PremiumExec"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_AST_PremiumExec.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ati-8x14"
+name = "ATI 8x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ATI_8x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ati-8x16"
+name = "ATI 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ATI_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ati-8x8"
+name = "ATI 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ATI_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ati-9x14"
+name = "ATI 9x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ATI_9x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ati-9x16"
+name = "ATI 9x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ATI_9x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ati-smallw-6x8"
+name = "ATI SmallW 6x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ATI_SmallW_6x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "att-pc6300"
+name = "AT&T PC6300"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ATT_PC6300.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "acer710-cga"
+name = "Acer710 CGA"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Acer710_CGA.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "acer710-mono"
+name = "Acer710 Mono"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Acer710_Mono.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "acer-vga-8x8"
+name = "Acer VGA 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Acer_VGA_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "amstrad-pc"
+name = "Amstrad PC"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Amstrad_PC.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "apricotportable"
+name = "ApricotPortable"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ApricotPortable.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "apricotxenc"
+name = "ApricotXenC"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ApricotXenC.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "apricot-256l"
+name = "Apricot 256L"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Apricot_256L.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "apricot-mono"
+name = "Apricot Mono"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Apricot_Mono.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "cl-eagleiii-8x16"
+name = "CL EagleIII 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_CL_EagleIII_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "cl-eagleiii-9x16"
+name = "CL EagleIII 9x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_CL_EagleIII_9x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "cl-eagleii-8x16"
+name = "CL EagleII 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_CL_EagleII_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "cl-eagleii-9x16"
+name = "CL EagleII 9x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_CL_EagleII_9x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "compaqthin-8x14"
+name = "CompaqThin 8x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_CompaqThin_8x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "compaqthin-8x16"
+name = "CompaqThin 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_CompaqThin_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "compaqthin-8x8"
+name = "CompaqThin 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_CompaqThin_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "compaq-port3"
+name = "Compaq Port3"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Compaq_Port3.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "compis"
+name = "Compis"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Compis.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "copam-bios"
+name = "Copam BIOS"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Copam_BIOS.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "dg-one"
+name = "DG One"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_DG_One.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "dos-v-twn16"
+name = "DOS/V TWN16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_DOS-V_TWN16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "dos-v-re-ank16"
+name = "DOS/V re. ANK16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_DOS-V_re_ANK16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "dos-v-re-jpn12"
+name = "DOS/V re. JPN12"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_DOS-V_re_JPN12.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "dos-v-re-jpn16"
+name = "DOS/V re. JPN16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_DOS-V_re_JPN16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "dos-v-re-prc16"
+name = "DOS/V re. PRC16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_DOS-V_re_PRC16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "dtk-bios"
+name = "DTK BIOS"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_DTK_BIOS.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "eaglespcga-alt1"
+name = "EagleSpCGA Alt1"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_EagleSpCGA_Alt1.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "eaglespcga-alt2"
+name = "EagleSpCGA Alt2"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_EagleSpCGA_Alt2.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "eaglespcga-alt3"
+name = "EagleSpCGA Alt3"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_EagleSpCGA_Alt3.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "epsonmga"
+name = "EpsonMGA"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_EpsonMGA.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "epsonmga-alt"
+name = "EpsonMGA Alt"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_EpsonMGA_Alt.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "epsonmga-mono"
+name = "EpsonMGA Mono"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_EpsonMGA_Mono.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "europc-cga"
+name = "EuroPC CGA"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_EuroPC_CGA.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "europc-mono"
+name = "EuroPC Mono"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_EuroPC_Mono.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "everexme-5x8"
+name = "EverexME 5x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_EverexME_5x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "everexme-7x8"
+name = "EverexME 7x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_EverexME_7x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "everexme-8x16"
+name = "EverexME 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_EverexME_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "fmtowns-re-8x16"
+name = "FMTowns re. 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_FMTowns_re_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "fmtowns-re-8x8"
+name = "FMTowns re. 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_FMTowns_re_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "hp-100lx-10x11"
+name = "HP 100LX 10x11"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_HP_100LX_10x11.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "hp-100lx-6x8"
+name = "HP 100LX 6x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_HP_100LX_6x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "hp-100lx-8x8"
+name = "HP 100LX 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_HP_100LX_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "igs-vga-8x16"
+name = "IGS VGA 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IGS_VGA_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "igs-vga-9x16"
+name = "IGS VGA 9x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_IGS_VGA_9x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "itt-xtra"
+name = "ITT Xtra"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ITT_Xtra.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "kaypro2k-g"
+name = "Kaypro2K G"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Kaypro2K_G.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "le-model-d-cga"
+name = "LE Model D CGA"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_LE_Model_D_CGA.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "le-model-d-mono"
+name = "LE Model D Mono"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_LE_Model_D_Mono.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "mbytepc230-8x16"
+name = "MBytePC230 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_MBytePC230_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "mbytepc230-cga"
+name = "MBytePC230 CGA"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_MBytePC230_CGA.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "mbytepc230-ega"
+name = "MBytePC230 EGA"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_MBytePC230_EGA.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "mbytepc230-mono"
+name = "MBytePC230 Mono"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_MBytePC230_Mono.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "master-512-m7"
+name = "Master 512-M7"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Master_512-M7.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "master-512"
+name = "Master 512"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Master_512.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "mindset"
+name = "Mindset"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Mindset.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "nec-apc3-8x16"
+name = "NEC APC3 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_NEC_APC3_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "nec-apc3-8x8"
+name = "NEC APC3 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_NEC_APC3_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "nec-multispeed"
+name = "NEC MultiSpeed"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_NEC_MultiSpeed.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "nix8810-m15"
+name = "Nix8810 M15"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Nix8810_M15.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "nix8810-m16"
+name = "Nix8810 M16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Nix8810_M16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "nix8810-m35"
+name = "Nix8810 M35"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Nix8810_M35.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "olivettithin-8x14"
+name = "OlivettiThin 8x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_OlivettiThin_8x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "olivettithin-8x16"
+name = "OlivettiThin 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_OlivettiThin_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "olivettithin-9x14"
+name = "OlivettiThin 9x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_OlivettiThin_9x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "olivettithin-9x16"
+name = "OlivettiThin 9x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_OlivettiThin_9x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "olivetti-m15"
+name = "Olivetti M15"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Olivetti_M15.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "paradise132-7x16"
+name = "Paradise132 7x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Paradise132_7x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "paradise132-7x9"
+name = "Paradise132 7x9"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Paradise132_7x9.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "philips-yes-g"
+name = "Philips :YES G"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Philips_YES_G.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "philips-yes-t"
+name = "Philips :YES T"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Philips_YES_T.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "phoenixega-8x14"
+name = "PhoenixEGA 8x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_PhoenixEGA_8x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "phoenixega-8x16"
+name = "PhoenixEGA 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_PhoenixEGA_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "phoenixega-8x8"
+name = "PhoenixEGA 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_PhoenixEGA_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "phoenixega-9x14"
+name = "PhoenixEGA 9x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_PhoenixEGA_9x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "phoenixvga-8x14"
+name = "PhoenixVGA 8x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_PhoenixVGA_8x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "phoenixvga-8x16"
+name = "PhoenixVGA 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_PhoenixVGA_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "phoenixvga-8x8"
+name = "PhoenixVGA 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_PhoenixVGA_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "phoenix-bios"
+name = "Phoenix BIOS"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Phoenix_BIOS.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "portfolio-6x8"
+name = "Portfolio 6x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Portfolio_6x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "rm-nimbus"
+name = "RM Nimbus"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_RM_Nimbus.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "rainbow100-re-132"
+name = "Rainbow100 re.132"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Rainbow100_re_132.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "rainbow100-re-40"
+name = "Rainbow100 re.40"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Rainbow100_re_40.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "robotron-a7100"
+name = "Robotron A7100"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Robotron_A7100.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "stb-autoega-8x14"
+name = "STB AutoEGA 8x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_STB_AutoEGA_8x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "stb-autoega-9x14"
+name = "STB AutoEGA 9x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_STB_AutoEGA_9x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "sanyombc16"
+name = "SanyoMBC16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_SanyoMBC16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "sanyombc55x"
+name = "SanyoMBC55x"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_SanyoMBC55x.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "sanyombc775"
+name = "SanyoMBC775"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_SanyoMBC775.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "seequacm"
+name = "SeequaCm"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_SeequaCm.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "sharp-pc3k"
+name = "Sharp PC3K"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Sharp_PC3K.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "sharp-pc3k-alt"
+name = "Sharp PC3K Alt"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Sharp_PC3K_Alt.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "siemens-pc-d"
+name = "Siemens PC-D"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Siemens_PC-D.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "sigma-rm-8x14"
+name = "Sigma RM 8x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Sigma_RM_8x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "sigma-rm-8x16"
+name = "Sigma RM 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Sigma_RM_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "sigma-rm-8x8"
+name = "Sigma RM 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Sigma_RM_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "sigma-rm-9x14"
+name = "Sigma RM 9x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Sigma_RM_9x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "sigma-rm-9x16"
+name = "Sigma RM 9x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Sigma_RM_9x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "sperrypc-8x16"
+name = "SperryPC 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_SperryPC_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "sperrypc-cga"
+name = "SperryPC CGA"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_SperryPC_CGA.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "ti-pro"
+name = "TI Pro"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_TI_Pro.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "tandy1k-ii-200l"
+name = "Tandy1K-II 200L"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Tandy1K-II_200L.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "tandy1k-ii-mono"
+name = "Tandy1K-II Mono"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Tandy1K-II_Mono.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "tandy1k-i-200l"
+name = "Tandy1K-I 200L"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Tandy1K-I_200L.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "tandy2k"
+name = "Tandy2K"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Tandy2K.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "tandy2k-g-tv"
+name = "Tandy2K G-TV"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Tandy2K_G-TV.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "tandy2k-g"
+name = "Tandy2K G"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Tandy2K_G.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "telepc"
+name = "TelePC"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_TelePC.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "toshibasat-8x14"
+name = "ToshibaSat 8x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ToshibaSat_8x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "toshibasat-8x16"
+name = "ToshibaSat 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ToshibaSat_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "toshibasat-8x8"
+name = "ToshibaSat 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ToshibaSat_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "toshibat300-8x16"
+name = "ToshibaT300 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ToshibaT300_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "toshibatxl1-8x16"
+name = "ToshibaTxL1 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ToshibaTxL1_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "toshibatxl1-8x8"
+name = "ToshibaTxL1 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ToshibaTxL1_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "toshibatxl2-8x16"
+name = "ToshibaTxL2 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ToshibaTxL2_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "toshibatxl2-8x8"
+name = "ToshibaTxL2 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_ToshibaTxL2_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "tridentearly-8x11"
+name = "TridentEarly 8x11"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_TridentEarly_8x11.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "tridentearly-8x14"
+name = "TridentEarly 8x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_TridentEarly_8x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "tridentearly-8x16"
+name = "TridentEarly 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_TridentEarly_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "tridentearly-8x8"
+name = "TridentEarly 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_TridentEarly_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "tridentearly-9x14"
+name = "TridentEarly 9x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_TridentEarly_9x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "tridentearly-9x16"
+name = "TridentEarly 9x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_TridentEarly_9x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "trident-8x11"
+name = "Trident 8x11"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Trident_8x11.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "trident-8x14"
+name = "Trident 8x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Trident_8x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "trident-8x16"
+name = "Trident 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Trident_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "trident-8x8"
+name = "Trident 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Trident_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "trident-9x14"
+name = "Trident 9x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Trident_9x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "trident-9x16"
+name = "Trident 9x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Trident_9x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "tsengeva-132-6x14"
+name = "TsengEVA 132 6x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_TsengEVA_132_6x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "tsengeva-132-6x8"
+name = "TsengEVA 132 6x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_TsengEVA_132_6x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "vtech-bios"
+name = "VTech BIOS"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_VTech_BIOS.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "verite-8x14"
+name = "Verite 8x14"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Verite_8x14.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "verite-8x16"
+name = "Verite 8x16"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Verite_8x16.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = true
+
+[[font]]
+id = "verite-8x8"
+name = "Verite 8x8"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Verite_8x8.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "wang-pro-color"
+name = "Wang Pro Color"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Wang_Pro_Color.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "wang-pro-mono"
+name = "Wang Pro Mono"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Wang_Pro_Mono.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "zenith-z-100"
+name = "Zenith Z-100"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Zenith_Z-100.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "zenith-z-100-alt"
+name = "Zenith Z-100 Alt"
+collection = "pc"
+format = "fon"
+file = "pc/Bm437_Zenith_Z-100_Alt.FON"
+license = "CC BY-SA 4.0"
+author = "VileR"
+url = "https://int10h.org/oldschool-pc-fonts/"
+featured = false
+
+[[font]]
+id = "cozette"
+name = "Cozette 1.8.1"
+collection = "vault"
+format = "bdf"
+file = "vault/cozette/cozette.bdf"
+author = "slavfox"
+license = "MIT"
+url = "https://github.com/slavfox/Cozette"
+featured = true
+
+[[font]]
+id = "creep2"
+name = "Creep2"
+collection = "vault"
+format = "bdf"
+file = "vault/creep2/creep2-11.bdf"
+author = "Raymond W. Ko"
+license = "MIT"
+url = "https://github.com/raymond-w-ko/creep2"
+featured = false
+
+[[font]]
+id = "gnu-unifont"
+name = "GNU Unifont 17.0.03"
+collection = "vault"
+format = "bdf"
+file = "vault/gnu-unifont/unifont-17.0.03.bdf"
+author = "Unifoundry"
+license = "GPL-2.0+ with font exception"
+url = "https://unifoundry.com/unifont/"
+featured = false
+
+[[font]]
+id = "gohufont"
+name = "Gohufont 2.1"
+collection = "vault"
+format = "bdf"
+file = "vault/gohufont/gohufont-11.bdf"
+author = "Hugo Chargois"
+license = "WTFPL"
+url = "https://font.gohu.org/"
+featured = false
+
+[[font]]
+id = "micro"
+name = "Micro"
+collection = "vault"
+format = "bdf"
+file = "vault/micro/micro.bdf"
+author = "u8g2 (olikraus)"
+license = "Public domain"
+url = "https://github.com/olikraus/u8g2/blob/master/tools/font/bdf/micro.bdf"
+featured = false
+
+[[font]]
+id = "scientifica"
+name = "scientifica"
+collection = "vault"
+format = "bdf"
+file = "vault/scientifica/scientifica-11.bdf"
+author = "Akshay Oppiliappan"
+license = "OFL 1.1"
+url = "https://github.com/oppiliappan/scientifica"
+featured = false
+
+[[font]]
+id = "spleen"
+name = "Spleen 8x16"
+collection = "vault"
+format = "bdf"
+file = "vault/spleen/spleen-8x16.bdf"
+author = "Frederic Cambus"
+license = "BSD-2-Clause"
+url = "https://github.com/fcambus/spleen"
+featured = true
+
+[[font]]
+id = "tamsyn"
+name = "Tamzen 6x12"
+collection = "vault"
+format = "bdf"
+file = "vault/tamsyn/Tamzen6x12r.bdf"
+author = "Scott Fial"
+license = "Permissive (see README)"
+url = "http://www.fial.com/~scott/tamsyn-font/"
+featured = false
+
+[[font]]
+id = "terminus"
+name = "Terminus 16"
+collection = "vault"
+format = "bdf"
+file = "vault/terminus/ter-u16n.bdf"
+author = "Dimitar Zhekov"
+license = "OFL 1.1"
+url = "https://terminus-font.sourceforge.net/"
+featured = true
+
+[[font]]
+id = "tiny5"
+name = "Tiny5"
+collection = "vault"
+format = "bdf"
+file = "vault/tiny5/font_tiny5.bdf"
+author = "u8g2 (olikraus)"
+license = "CC0 1.0"
+url = "https://github.com/olikraus/u8g2/blob/master/tools/font/bdf/font_tiny5.bdf"
+featured = false
+
+[[font]]
+id = "ucs-fonts"
+name = "X11 UCS 6x13"
+collection = "vault"
+format = "bdf"
+file = "vault/ucs-fonts/6x13.bdf"
+author = "Markus Kuhn"
+license = "Public domain"
+url = "https://www.cl.cam.ac.uk/~mgk25/ucs-fonts.html"
+featured = false
+
+[[font]]
+id = "proggy-clean"
+name = "Proggy Clean"
+collection = "vault"
+format = "outline"
+file = "vault/proggy-clean/ProggyClean.ttf"
+author = "Tristan Grimmer"
+license = "MIT"
+url = "https://github.com/bluescan/proggyfonts"
+featured = false
+
+[[font]]
+id = "unscii"
+name = "unscii-8"
+collection = "vault"
+format = "outline"
+file = "vault/unscii/unscii-8.ttf"
+author = "viznut"
+license = "Public domain"
+url = "https://github.com/viznut/unscii"
+featured = true
+
+[[font]]
+id = "zx-spectrum-strict"
+name = "ZX Spectrum Strict"
+collection = "vault"
+format = "outline"
+file = "vault/zx-spectrum-strict/zxSpectrumStrict.ttf"
+author = "48BASIC"
+license = "GPL-3.0"
+url = "https://github.com/48BASIC/zx-spectrum-font"
+featured = true
+
+[[font]]
+id = "profont"
+name = "ProFont"
+collection = "vault"
+format = "outline"
+file = "vault/profont/ProFontOTB.otb"
+author = "Tobias Jung"
+license = "MIT"
+url = "https://tobiasjung.name/profont/"
+featured = false
+
+[[font]]
+id = "ccmono-term-font"
+name = "CCMono"
+collection = "vault"
+format = "sheet"
+file = "vault/ccmono-term-font/term_font.bmp"
+w = 8
+h = 11
+cols = 16
+first = 0x00
+author = "yyny"
+license = "MIT"
+url = "https://github.com/yyny/ccmono"
+featured = false
+
+[[font]]
+id = "monocraft-ascii"
+name = "Monocraft"
+collection = "vault"
+format = "sheet"
+file = "vault/monocraft-ascii/ascii.png"
+w = 8
+h = 8
+cols = 16
+first = 0x00
+author = "Andre601 (Monocraft by IdreesInc)"
+license = "OFL 1.1"
+url = "https://github.com/Andre601/Monocraft-Bitmap"
+featured = true
+
+[[font]]
+id = "ascii-cellphone"
+name = "Cellphone"
+collection = "vault"
+format = "sheet"
+file = "vault/ascii-cellphone/charmap-cellphone_white.png"
+w = 7
+h = 9
+cols = 18
+license = "CC BY 4.0"
+author = "domsson"
+url = "https://opengameart.org/content/ascii-bitmap-font-cellphone"
+featured = true
+
+[[font]]
+id = "ascii-futuristic"
+name = "Futuristic"
+collection = "vault"
+format = "sheet"
+file = "vault/ascii-futuristic/charmap-futuristic_white.png"
+w = 7
+h = 9
+cols = 18
+license = "CC BY 4.0"
+author = "domsson"
+url = "https://opengameart.org/content/ascii-bitmap-font-futuristic"
+featured = false
+
+[[font]]
+id = "ascii-oldschool"
+name = "Oldschool (domsson)"
+collection = "vault"
+format = "sheet"
+file = "vault/ascii-oldschool/charmap-oldschool_white.png"
+w = 7
+h = 9
+cols = 18
+license = "CC BY 4.0"
+author = "domsson"
+url = "https://opengameart.org/content/ascii-bitmap-font-oldschool"
+featured = false
+
+[[font]]
+id = "intrepid-monochrome"
+name = "Intrepid Monochrome"
+collection = "vault"
+format = "sheet"
+file = "vault/intrepid-monochrome/intrepid.png"
+w = 8
+h = 8
+cols = 16
+license = "CC0 1.0"
+author = "Daniel Linssen / Managore"
+url = "https://opengameart.org/content/intrepid-monochrome-8-bit-font"
+featured = true
+
+[[font]]
+id = "pixel-font-basic-latin"
+name = "Pixel Font Basic Latin"
+collection = "vault"
+format = "sheet"
+file = "vault/pixel-font-basic-latin/pixel_font_basic_latin_ascii.png"
+w = 7
+h = 9
+cols = 16
+license = "CC0 1.0"
+author = "Clint Bellanger"
+url = "https://opengameart.org/content/pixel-font-basic-latin-latin-1-box-drawing"
+featured = false
+
+[[font]]
+id = "squont8ascii"
+name = "Squont8ASCII"
+collection = "vault"
+format = "sheet"
+file = "vault/squont8ascii/squont8ascii.png"
+w = 8
+h = 8
+cols = 16
+first = 0x00
+license = "CC BY 4.0"
+author = "pza_siliconf"
+url = "https://opengameart.org/content/squont8ascii"
+featured = false
+
+[[font]]
+id = "terminal-16x12"
+name = "Terminal 16x12"
+collection = "vault"
+format = "sheet"
+file = "vault/terminal-16x12/pixfont.png"
+w = 12
+h = 16
+cols = 16
+license = "CC0 1.0"
+author = "Clint Bellanger"
+url = "https://opengameart.org/content/16x12-terminal-bitmap-font"
+featured = true
+

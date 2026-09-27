@@ -1,0 +1,12 @@
+{
+  "name": "osd-fonts-site-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/js/*.test.mjs",
+    "test:browser": "node tests/js/site-browser.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}

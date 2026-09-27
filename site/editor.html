@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MAX7456 font editor · OSD Fonts</title>
+<meta name="description" content="Edit Betaflight analog OSD fonts (.mcm) pixel by pixel in your browser: draw, compose multi-character graphics, import a boot logo, preview on a live OSD, save or upload to your flight controller.">
+<link rel="canonical" href="https://over9kfpv.github.io/osd-fonts/editor.html">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/editor.css">
+</head>
+<body>
+<div class="wrap wide">
+  <header class="top">
+    <a class="logo" href="index.html"><img src="assets/icon.svg" alt="" width="28" height="28">OSD Fonts</a>
+    <nav class="nav" aria-label="Main"><a href="index.html">Browse</a><a href="mix.html">Mix fonts &amp; icons</a><a href="editor.html" aria-current="page">Editor</a><a href="install.html">Install</a><a href="https://github.com/Over9kfpv/osd-fonts">GitHub</a></nav>
+  </header>
+
+  <div class="ed-bar">
+    <h1 class="ed-title">Font editor <span id="file-name" class="muted"></span></h1>
+    <div class="row">
+      <button class="btn" id="presets" type="button">Load a font…</button>
+      <label class="btn" for="open">Open file</label>
+      <input type="file" id="open" accept=".mcm,.h,text/plain" hidden>
+      <button class="btn" id="save-mcm" type="button">Save .mcm</button>
+      <button class="btn" id="save-h" type="button">Save .h</button>
+      <button class="btn accent" id="upload" type="button">Upload to FC</button>
+      <button class="btn danger" id="new" type="button">New (clear)</button>
+    </div>
+  </div>
+
+  <div class="ed">
+    <aside class="panel ed-tools" aria-label="Drawing tools">
+      <div class="ed-canvas-wrap" id="canvas-wrap">
+        <canvas id="canvas" aria-label="Pixel editor for the selected character"></canvas>
+        <img id="overlay" alt="" hidden>
+      </div>
+      <div class="row" style="align-items:center">
+        <select id="glyph" aria-label="Character" style="flex:1"></select>
+        <div class="swatches" role="radiogroup" aria-label="Colour">
+          <button type="button" class="swatch" data-v="0" role="radio" aria-label="Black (1)" title="Black (1)"></button>
+          <button type="button" class="swatch" data-v="1" role="radio" aria-label="Transparent (2)" title="Transparent (2)"></button>
+          <button type="button" class="swatch" data-v="2" role="radio" aria-label="White (3)" title="White (3)"></button>
+        </div>
+      </div>
+      <p class="label">Tools</p>
+      <div class="tool-grid" role="group" aria-label="Tool">
+        <button type="button" data-tool="pencil" title="Pencil (P)">Pencil</button>
+        <button type="button" data-tool="line" title="Line (L): drag from start to end">Line</button>
+        <button type="button" data-tool="rect" title="Rectangle (R): drag corner to corner">Rect</button>
+        <button type="button" data-tool="fill" title="Fill (F)">Fill</button>
+        <button type="button" id="invert" title="Swap black and white">Invert</button>
+      </div>
+      <div class="tool-grid four" role="group" aria-label="Shift pixels">
+        <button type="button" data-shift="0,-1" aria-label="Shift up">↑</button>
+        <button type="button" data-shift="0,1" aria-label="Shift down">↓</button>
+        <button type="button" data-shift="-1,0" aria-label="Shift left">←</button>
+        <button type="button" data-shift="1,0" aria-label="Shift right">→</button>
+      </div>
+      <div class="tool-grid two">
+        <button type="button" id="copy" title="Ctrl+C">Copy</button>
+        <button type="button" id="paste" title="Ctrl+V">Paste</button>
+      </div>
+      <div class="tool-grid three">
+        <button type="button" id="undo" title="Ctrl+Z">Undo</button>
+        <button type="button" id="redo" title="Ctrl+Shift+Z">Redo</button>
+        <button type="button" id="clear" class="danger">Clear</button>
+      </div>
+      <button type="button" id="compose" aria-pressed="false">Composition mode</button>
+      <div id="compose-panel" class="compose-panel" hidden>
+        <p class="muted">Click characters in the grid to add or remove them. They are edited as one picture, left to right, top to bottom.</p>
+        <div class="field"><label for="compose-cols">Columns</label><input type="number" id="compose-cols" min="1" max="24" value="1"></div>
+        <p class="mono" id="compose-list"></p>
+      </div>
+      <div class="field">
+        <span class="label">Tracing overlay</span>
+        <div class="row">
+          <label class="btn" for="overlay-file" style="flex:1">Choose image…</label>
+          <input type="file" id="overlay-file" accept="image/*" hidden>
+        </div>
+        <div id="overlay-controls" class="row" hidden>
+          <input type="range" id="overlay-opacity" min="0" max="1" step="0.05" value="0.5" aria-label="Overlay opacity" style="flex:1">
+          <button type="button" id="overlay-invert">Invert</button>
+          <button type="button" id="overlay-remove">Remove</button>
+        </div>
+      </div>
+      <p class="status" id="status" role="status"></p>
+    </aside>
+
+    <main class="ed-main">
+      <section class="panel">
+        <div class="sheet-wrap"><div class="sheet" id="sheet" aria-label="All 256 characters"></div></div>
+        <p class="status" id="sheet-info">Click a character to edit it.</p>
+      </section>
+      <div class="ed-lower">
+        <section class="panel">
+          <div class="row" style="justify-content:space-between;align-items:center">
+            <h2>Boot logo <span class="muted mono" style="font-size:12px">288×72, 0xA0–0xFF</span></h2>
+            <div class="row">
+              <label class="btn" for="logo-file">Import image</label>
+              <input type="file" id="logo-file" accept="image/*,.bmp" hidden>
+              <button type="button" class="btn" id="logo-export">Export BMP</button>
+              <button type="button" class="btn" id="logo-edit">Edit as picture</button>
+            </div>
+          </div>
+          <canvas id="logo" class="logo-canvas" width="288" height="72" aria-label="Boot logo assembled from characters 0xA0 to 0xFF"></canvas>
+        </section>
+        <section class="panel">
+          <div class="row" style="justify-content:space-between;align-items:center">
+            <h2>OSD preview</h2>
+            <input type="text" id="craft" maxlength="15" value="RETRO QUAD" aria-label="Craft name" style="width:150px;text-transform:uppercase">
+          </div>
+          <div class="screen"><canvas id="screen" aria-label="Simulated FPV feed using the font being edited"></canvas></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="presets-dialog" class="upload-dialog">
+    <form method="dialog">
+      <h2>Load a font</h2>
+      <div class="field"><label for="preset-iconset">Betaflight font / icon set</label><select id="preset-iconset"></select></div>
+      <div class="field"><label for="preset-font">Letters from (optional)</label><select id="preset-font"></select></div>
+      <p class="muted">This replaces the font you're editing. Save it first if you want to keep it.</p>
+      <div class="row"><button value="cancel" class="btn">Cancel</button><button value="load" class="btn accent">Load</button></div>
+    </form>
+  </dialog>
+  <dialog id="confirm-dialog" class="upload-dialog">
+    <form method="dialog">
+      <h2 id="confirm-title">Are you sure?</h2>
+      <p id="confirm-text" class="muted"></p>
+      <div class="row"><button value="cancel" class="btn">Cancel</button><button value="ok" class="btn danger" id="confirm-ok">OK</button></div>
+    </form>
+  </dialog>
+
+  <footer class="foot">
+    <p>Shortcuts: 1/2/3 colour, P/L/R/F tool, arrows move pixels, [ and ] previous/next character, Ctrl+Z / Ctrl+Shift+Z undo/redo, Ctrl+C / Ctrl+V copy/paste. Your work is saved in this browser automatically.</p>
+    <p>Also by us: <a href="https://over9kfpv.github.io/stickbeats/">Stickbeats</a>, fun sound themes for EdgeTX radios.</p>
+  </footer>
+</div>
+<script type="module" src="assets/editor.js"></script>
+</body>
+</html>

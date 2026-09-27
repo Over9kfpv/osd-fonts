@@ -1,0 +1,57 @@
+# Symbol groups for the mixer, from Betaflight src/main/drivers/osd_symbols.h (master, 2026-09).
+# Each code 0x00-0xFF belongs to exactly one group; "other" takes whatever no group lists.
+# Ranges are inclusive: "0x90-0x97".
+
+[[group]]
+id = "text"
+name = "Text"
+about = "Letters, digits and punctuation (0x20-0x5F). Comes from the text font; characters it lacks fall back to the icon set."
+codes = ["0x20-0x23", "0x25-0x5F"]
+
+[[group]]
+id = "battery"
+name = "Battery & power"
+about = "Battery gauge, main battery, volts, amps, mAh."
+codes = ["0x90-0x97", "0x06", "0x07", "0x9A"]
+
+[[group]]
+id = "signal"
+name = "Signal & status"
+about = "RSSI, link quality, satellites, throttle, blackbox, home, temperature, lap time, checkered flag."
+codes = ["0x01", "0x04", "0x05", "0x10", "0x11", "0x12", "0x1E", "0x1F", "0x24", "0x79", "0x7A", "0x7B"]
+
+[[group]]
+id = "horizon"
+name = "Horizon & crosshair"
+about = "Artificial horizon bars, crosshair, sidebars, roll and pitch."
+codes = ["0x02", "0x03", "0x13", "0x14", "0x15", "0x72-0x74", "0x80-0x88"]
+
+[[group]]
+id = "arrows"
+name = "Arrows & compass"
+about = "Home arrows, compass heading bar, small up/down arrows."
+codes = ["0x60-0x6F", "0x18-0x1D", "0x75", "0x76"]
+
+[[group]]
+id = "units"
+name = "Units"
+about = "m, ft, °C/°F, km, mi, ALT, LAT/LON, speed and distance units, on/fly minutes."
+codes = ["0x0C-0x0F", "0x70", "0x71", "0x7D-0x7F", "0x89", "0x98", "0x99", "0x9B-0x9F"]
+
+[[group]]
+id = "bars"
+name = "Bars & stick overlay"
+about = "Progress bar pieces and the stick overlay sprites."
+codes = ["0x08-0x0B", "0x16", "0x17", "0x8A-0x8F"]
+
+[[group]]
+id = "logo"
+name = "Logo"
+about = "The 288x72 boot logo, 24x4 characters at 0xA0-0xFF."
+codes = ["0xA0-0xFF"]
+
+[[group]]
+id = "other"
+name = "Other"
+about = "Unused and spare slots."
+codes = []

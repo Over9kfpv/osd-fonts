@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Install a font · OSD Fonts</title>
+<meta name="description" content="How to put a new font on a Betaflight analog OSD (MAX7456): with Betaflight Configurator's Font Manager, or straight from the browser over USB.">
+<link rel="canonical" href="https://over9kfpv.github.io/osd-fonts/install.html">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="index.html"><img src="assets/icon.svg" alt="" width="28" height="28">OSD Fonts</a>
+    <nav class="nav" aria-label="Main"><a href="index.html">Browse</a><a href="mix.html">Mix fonts &amp; icons</a><a href="editor.html">Editor</a><a href="install.html" aria-current="page">Install</a><a href="https://github.com/Over9kfpv/osd-fonts">GitHub</a></nav>
+  </header>
+
+  <section class="hero">
+    <p class="eyebrow">Install</p>
+    <h1>Put a font on your OSD</h1>
+    <p class="lede">These fonts are for flight controllers with an analog OSD chip (MAX7456 or compatible) running Betaflight. The font lives in the OSD chip, so it stays after a firmware flash.</p>
+  </section>
+
+  <section class="how">
+    <section>
+      <h2>With Betaflight Configurator</h2>
+      <ol>
+        <li>Download the <code>.mcm</code> from Browse or Mix.</li>
+        <li>Connect the flight controller and open Configurator.</li>
+        <li>Open the <b>OSD</b> tab and click <b>Font Manager</b>.</li>
+        <li>Click <b>Load font file</b> and pick the <code>.mcm</code>.</li>
+        <li>Click <b>Upload font</b> and wait until it finishes.</li>
+        <li>Power-cycle the quad.</li>
+      </ol>
+    </section>
+    <section>
+      <h2>Straight from this site</h2>
+      <ol>
+        <li>Use Chrome, Edge or Opera on a desktop computer (they have Web Serial).</li>
+        <li>Plug in the flight controller over USB. Add a battery if the OSD chip is only powered from it.</li>
+        <li>Close Configurator and any CLI session, so the port is free.</li>
+        <li>On the Mix page or in the editor, click <b>Upload to FC</b> and pick the port.</li>
+        <li>Power-cycle the quad when it says Done.</li>
+      </ol>
+    </section>
+    <section>
+      <h2>If it doesn't work</h2>
+      <ul>
+        <li><b>No reply:</b> another app still has the port open, or the board is in DFU mode. Close the app, unplug and replug.</li>
+        <li><b>Stops part-way:</b> the OSD chip lost power. Connect a battery and try again.</li>
+        <li><b>Old font still shows:</b> the chip only reloads its font at power-up.</li>
+        <li><b>Want your old font back:</b> Configurator's Font Manager has the stock fonts, or re-upload a saved <code>.mcm</code>.</li>
+      </ul>
+    </section>
+  </section>
+
+  <section class="how">
+    <section>
+      <h2>What gets replaced</h2>
+      <p class="muted">A font has 256 characters of 12×18 pixels. Retro fonts only supply letters, digits and punctuation (0x20–0x5F). Symbols such as battery, RSSI, horizon and arrows come from an icon set, and 0xA0–0xFF hold the 288×72 boot logo.</p>
+    </section>
+    <section>
+      <h2>Digital systems</h2>
+      <p class="muted">DJI, HDZero, Walksnail and Avatar goggles draw the OSD themselves with their own font format. <code>.mcm</code> files only apply to analog MAX7456 OSDs.</p>
+    </section>
+  </section>
+
+  <footer class="foot">
+    <p>Also by us: <a href="https://over9kfpv.github.io/stickbeats/">Stickbeats</a>, fun sound themes for EdgeTX radios.</p>
+  </footer>
+</div>
+</body>
+</html>

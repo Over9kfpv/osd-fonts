@@ -1,0 +1,53 @@
+# Icon sets: complete 256-character Betaflight fonts whose symbols (and logo) can be mixed
+# with any text font. All ten come from Betaflight Configurator, resources/osd/2/,
+# commit 7754ad4e9385a67dd302a084729c58152b6cadfe, licensed GPL-3.0.
+
+[[iconset]]
+id = "default"
+name = "Default"
+file = "default.mcm"
+
+[[iconset]]
+id = "betaflight"
+name = "Betaflight"
+file = "betaflight.mcm"
+
+[[iconset]]
+id = "bold"
+name = "Bold"
+file = "bold.mcm"
+
+[[iconset]]
+id = "clarity"
+name = "Clarity"
+file = "clarity.mcm"
+
+[[iconset]]
+id = "digital"
+name = "Digital"
+file = "digital.mcm"
+
+[[iconset]]
+id = "impact"
+name = "Impact"
+file = "impact.mcm"
+
+[[iconset]]
+id = "impact_mini"
+name = "Impact mini"
+file = "impact_mini.mcm"
+
+[[iconset]]
+id = "large"
+name = "Large"
+file = "large.mcm"
+
+[[iconset]]
+id = "extra_large"
+name = "Extra large"
+file = "extra_large.mcm"
+
+[[iconset]]
+id = "vision"
+name = "Vision"
+file = "vision.mcm"
