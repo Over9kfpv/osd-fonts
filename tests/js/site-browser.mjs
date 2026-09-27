@@ -128,6 +128,28 @@ await check("mix: CC0 letters + CC0 icons make a public-domain font", async (pag
   assert.doesNotMatch(await page.textContent("#license"), /public domain/)
 })
 
+await check("mix: letter edge effects apply and survive a shared link", async (page) => {
+  await page.goto(base + "mix.html?font=ibm-vga-8x16")
+  await page.waitForSelector("#sheet .ch")
+  await page.click('.fx-style [data-style="shadow"]')
+  await page.click('.dirpad [data-dir="nw"]')
+  await page.click('.fx-colour [data-invert="1"]')
+  const url = new URL(page.url())
+  assert.deepEqual([url.searchParams.get("fx"), url.searchParams.get("dir"), url.searchParams.get("inv")], ["shadow", "nw", "1"])
+  const { name, font } = await downloadMcm(page, "#download")
+  assert.match(name, /shadow-nw-inv/)
+  const a = font[0x41]
+  const where = (v) => [...a.keys()].filter((i) => a[i] === v)
+  assert.ok(where(0).length > 0 && where(2).length > 0, "black letters with a white shadow")
+  const again = await context.newPage()
+  await again.goto(page.url())
+  await again.waitForSelector("#sheet .ch")
+  assert.equal(await again.getAttribute('.dirpad [data-dir="nw"]', "aria-pressed"), "true")
+  const second = await downloadMcm(again, "#download")
+  assert.deepEqual(second.font[0x41], a)
+  await again.close()
+})
+
 await check("mix → editor hand-off, draw, undo, save", async (page) => {
   await page.goto(base + "mix.html?font=unscii&icons=impact")
   await page.waitForSelector("#sheet .ch")

@@ -1,7 +1,8 @@
 import "./theme.js"
-import { compose, fileName, isPublicDomain, loadData } from "./compose.js"
+import { DEFAULT_EFFECT, compose, fileName, isPublicDomain, loadData, normalizeEffect } from "./compose.js"
 import { download, serializeMCM } from "./mcm.js"
 import { OsdDemo, drawSample, osdLabel } from "./osd-demo.js"
+import { effectControls, effectTag } from "./effects-ui.js"
 
 const $ = (id) => document.getElementById(id)
 const data = await loadData()
@@ -29,6 +30,7 @@ const state = {
   groupAlike: true,
   family: null,
   q: "",
+  effect: { ...DEFAULT_EFFECT },
   filters: Object.fromEntries(FACETS.map((f) => [f.key, new Set()])),
 }
 
@@ -40,6 +42,7 @@ try {
   if (data.iconsetById.has(saved.icons)) state.icons = saved.icons
   if (typeof saved.picks === "boolean") state.picks = saved.picks
   if (typeof saved.groupAlike === "boolean") state.groupAlike = saved.groupAlike
+  if (saved.effect) state.effect = normalizeEffect(saved.effect)
   for (const f of FACETS) for (const v of saved.filters?.[f.key] ?? []) if (f.values.some(([x]) => x === v)) state.filters[f.key].add(v)
 } catch {}
 const deepLink = decodeURIComponent(location.hash.slice(1)) || new URLSearchParams(location.search).get("font")
@@ -52,7 +55,7 @@ const save = () => {
   try {
     localStorage.setItem("osdfonts.browse", JSON.stringify({
       font: state.font.id, mode: state.mode, sort: state.sort, icons: state.icons, picks: state.picks,
-      groupAlike: state.groupAlike, filters: Object.fromEntries(FACETS.map((f) => [f.key, [...state.filters[f.key]]])),
+      groupAlike: state.groupAlike, effect: state.effect, filters: Object.fromEntries(FACETS.map((f) => [f.key, [...state.filters[f.key]]])),
     }))
   } catch {}
 }
@@ -147,7 +150,13 @@ function buildFacets() {
 
 // ---- demo
 const demo = new OsdDemo($("screen"))
-const composed = (font) => compose(data, { font, mode: state.mode, base: state.icons })
+const composed = (font) => compose(data, { font, mode: state.mode, base: state.icons, effect: state.effect })
+effectControls($("fx"), state.effect, (fx) => {
+  state.effect = fx
+  save()
+  buildGrid()
+  select(state.font)
+})
 
 // ---- gallery (card previews are drawn as they scroll into view)
 const grid = $("grid")
@@ -298,7 +307,8 @@ $("clear").addEventListener("click", () => {
   refresh()
 })
 $("download").addEventListener("click", () => {
-  const suffix = (state.font.native || state.mode === "small" ? "" : "-tall") + (state.icons === "default" ? "" : `-${state.icons}`)
+  const fx = effectTag(state.effect)
+  const suffix = (state.font.native || state.mode === "small" ? "" : "-tall") + (fx ? `-${fx}` : "") + (state.icons === "default" ? "" : `-${state.icons}`)
   download(`${fileName(state.font.id)}${suffix}.mcm`, serializeMCM(composed(state.font)))
 })
 

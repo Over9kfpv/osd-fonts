@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs"
 import { test } from "node:test"
 
 import { TEXT_CODES, compose, indexData, licenseSummary, provenance, renderGlyph } from "../../site/assets/compose.js"
+import { BLACK } from "../../site/assets/mcm.js"
 import { LOGO, logoToBMP, rgbaToLogo } from "../../site/assets/logo.js"
 import {
   GLYPHS, TRANSPARENT, WHITE, bytesToFont, emptyFont, fontToBytes, parseH, parseMCM, serializeH, serializeMCM,
@@ -123,4 +124,32 @@ test("OSD label: the font name, shortened to a 15-character craft name", () => {
   for (const name of ["Kaneko Aero Fighters Font 1", "Minimal5x5Monospaced", "4025114973 F260a0378a O"]) {
     assert.ok(osdLabel(name).length <= 15, name)
   }
+})
+
+test("letter edges: shadow falls on one side, bevel reaches 2 px, black letters swap colours", () => {
+  const rows = ["111", "111", "111"]
+  const at = (cell) => (x, y) => cell[y * 12 + x]
+  const px = (cell, v) => [...cell.keys()].filter((i) => cell[i] === v).map((i) => [i % 12, Math.floor(i / 12)])
+  const face = (cell) => px(cell, WHITE)
+  const box = (pts) => ({ x0: Math.min(...pts.map((p) => p[0])), x1: Math.max(...pts.map((p) => p[0])), y0: Math.min(...pts.map((p) => p[1])), y1: Math.max(...pts.map((p) => p[1])) })
+
+  const outline = renderGlyph(rows, "small")
+  assert.equal(px(outline, BLACK).length, 16, "3x3 block + 1 px ring = 16 edge pixels")
+
+  const shadow = renderGlyph(rows, "small", { style: "shadow", dir: "se" })
+  const f = box(face(shadow))
+  const e = box(px(shadow, BLACK))
+  assert.deepEqual([e.x0, e.y0, e.x1, e.y1], [f.x0, f.y0, f.x1 + 1, f.y1 + 1], "shadow only right and below")
+  assert.equal(at(shadow)(f.x0 - 1, f.y0), TRANSPARENT, "nothing on the left")
+
+  const bevel = renderGlyph(rows, "small", { style: "bevel", dir: "nw" })
+  const fb = box(face(bevel))
+  const eb = box(px(bevel, BLACK))
+  assert.deepEqual([eb.x0, eb.y0, eb.x1, eb.y1], [fb.x0 - 2, fb.y0 - 2, fb.x1 + 1, fb.y1 + 1], "bevel: 1 px ring + 2 px towards up-left")
+
+  const inverted = renderGlyph(rows, "small", { style: "outline", invert: true })
+  assert.deepEqual(px(inverted, BLACK), px(outline, WHITE), "letters become black")
+  assert.deepEqual(px(inverted, WHITE), px(outline, BLACK), "edge becomes white")
+
+  assert.ok(renderGlyph(rows, "small", { style: "none" }).every((v) => v !== BLACK), "no edge at all")
 })

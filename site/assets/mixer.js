@@ -1,5 +1,6 @@
 import "./theme.js"
-import { compose, fileName, licenseSummary, loadData, provenance } from "./compose.js"
+import { compose, fileName, licenseSummary, loadData, normalizeEffect, provenance } from "./compose.js"
+import { effectControls, effectTag } from "./effects-ui.js"
 import { drawLogo, fileToLogo } from "./logo.js"
 import { CH, CW, download, serializeMCM } from "./mcm.js"
 import { OsdDemo, osdLabel, putGlyph } from "./osd-demo.js"
@@ -14,6 +15,7 @@ const q = new URLSearchParams(location.search)
 const state = {
   font: data.fontById.get(q.get("font")) ?? data.fontById.get("ibm-vga-8x16") ?? data.fonts[0],
   mode: q.get("mode") === "tall" ? "tall" : "small",
+  effect: normalizeEffect({ style: q.get("fx") ?? "outline", dir: q.get("dir") ?? "se", invert: q.get("inv") === "1" }),
   icons: data.iconsetById.has(q.get("icons")) ? q.get("icons") : "default",
   logo: "", // "default" = Betaflight logo, "cc0" = OSD Fonts CC0 logo, "custom" = uploaded image
   pro: q.get("pro") === "1",
@@ -36,6 +38,7 @@ function mixOptions() {
   return {
     font: state.font,
     mode: state.mode,
+    effect: state.effect,
     base: state.icons,
     sources,
     logo: state.logo === "custom" ? state.customLogo : null,
@@ -47,6 +50,9 @@ function syncUrl() {
   const p = new URLSearchParams()
   p.set("font", state.font ? state.font.id : "none")
   if (state.mode !== "small") p.set("mode", state.mode)
+  if (state.effect.style !== "outline") p.set("fx", state.effect.style)
+  if (["shadow", "bevel"].includes(state.effect.style)) p.set("dir", state.effect.dir)
+  if (state.effect.invert) p.set("inv", "1")
   p.set("icons", state.icons)
   if (state.logo !== "custom" && state.logo !== matchingLogo(state.icons)) p.set("logo", state.logo)
   if (state.pro) {
@@ -208,7 +214,11 @@ $("pro").addEventListener("change", (e) => {
 })
 
 const name = () =>
-  fileName([state.font?.id ?? "stock", state.icons !== "default" ? state.icons : "", state.pro ? "mix" : ""].filter(Boolean).join("-"))
+  fileName([state.font?.id ?? "stock", effectTag(state.effect), state.icons !== "default" ? state.icons : "", state.pro ? "mix" : ""].filter(Boolean).join("-"))
+effectControls($("fx"), state.effect, (fx) => {
+  state.effect = fx
+  update()
+})
 $("download").addEventListener("click", () => {
   download(`${name()}.mcm`, serializeMCM(current))
   $("status").textContent = `Saved ${name()}.mcm`
