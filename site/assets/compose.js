@@ -7,7 +7,7 @@ export const TEXT_CODES = []
 for (let c = 0x20; c < 0x60; c++) if (c !== 0x24) TEXT_CODES.push(c)
 
 /** Raw glyph rows ("0101…" strings) → 12x18 cell: optional 2x vertical, centred, 1 px black outline. */
-export function renderGlyph(rows, mode = "tall") {
+export function renderGlyph(rows, mode = "small") {
   let g = rows.map((r) => Array.from(r, (c) => c === "1"))
   if (mode === "tall" && g.length * 2 + 2 <= CH) g = g.flatMap((r) => [r, r])
   const h = g.length
@@ -70,12 +70,12 @@ export function indexData(fontData, iconData) {
 /**
  * Compose a font.
  *   font       catalog font (or null to keep the icon set's own text)
- *   mode       "tall" | "small" (8 px fonts only; taller fonts are always native)
+ *   mode       "small" (1:1 centred, the default) | "tall" (2x high; 8 px fonts only, taller fonts are always native)
  *   sources    { groupId: iconsetId } — groups not listed use `base`
  *   base       icon set id used for everything else, and for text characters the font lacks
  *   logo       optional array of 96 glyphs for 0xA0-0xFF (a custom logo)
  */
-export function compose(data, { font = null, mode = "tall", base = "default", sources = {}, logo = null }) {
+export function compose(data, { font = null, mode = "small", base = "default", sources = {}, logo = null }) {
   const baseSet = data.iconsetById.get(base) ?? data.iconsets[0]
   const out = baseSet.glyphs.map((g) => g.slice())
   for (const g of data.groups) {

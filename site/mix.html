@@ -9,56 +9,64 @@
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="assets/style.css">
+<script>try { const t = localStorage.getItem("osdf-theme"); if (t) document.documentElement.dataset.theme = t } catch (e) {}</script>
 <style>
-  .pro-groups { display: grid; gap: 10px; }
-  .pro-groups .field label { text-transform: none; letter-spacing: 0; font: 600 13px var(--body); color: var(--text); }
-  .pro-groups .about { font-size: 12px; color: var(--muted); }
-  .toggle { display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer; }
-  .toggle input { accent-color: var(--amber); width: 18px; height: 18px; }
-  .logo-preview { width: 100%; background: var(--video); border-radius: 4px; image-rendering: pixelated; }
-  .license { font-size: 12px; color: var(--muted); }
+  .mixer { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 36px); align-items: start; }
+  @media (max-width: 960px) { .mixer { grid-template-columns: 1fr; } }
+  .pro-groups { display: grid; gap: 12px; padding-top: 4px; }
+  .pro-groups .field > label { text-transform: none; letter-spacing: 0; font: 600 14px var(--body); color: var(--ink); }
+  .pro-groups .about { font-size: 13px; color: var(--muted); }
+  .switch { display: flex; align-items: center; gap: 10px; font-weight: 600; cursor: pointer; }
+  .switch input { accent-color: var(--accent); width: 18px; height: 18px; }
+  .logo-preview { width: 100%; background: var(--video); border-radius: 8px; image-rendering: pixelated; display: block; }
+  .license { font-size: 13px; color: var(--muted); }
   .sheet-info { font: 12px var(--mono); color: var(--muted); min-height: 1.5em; }
+  .divider { border: 0; border-top: 1px solid var(--line); margin: 2px 0; width: 100%; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="logo" href="index.html"><img src="assets/icon.svg" alt="" width="28" height="28">OSD Fonts</a>
-    <nav class="nav" aria-label="Main"><a href="index.html">Browse</a><a href="mix.html" aria-current="page">Mix fonts &amp; icons</a><a href="editor.html">Editor</a><a href="install.html">Install</a><a href="https://github.com/Over9kfpv/osd-fonts">GitHub</a></nav>
+    <a class="logo" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="5" width="28" height="22" rx="6" fill="currentColor"/><path fill="var(--ground)" d="M13 10h6v2h-6zM11 12h2v10h-2zM19 12h2v10h-2zM13 16h6v2h-6z"/><circle cx="25.5" cy="9.5" r="1.7" fill="var(--accent)"/></svg>OSD Fonts</a>
+    <nav class="nav" aria-label="Main"><a href="index.html#fonts">Retro fonts</a><a href="mix.html" aria-current="page">Mix fonts &amp; icons</a><a href="editor.html">Font editor</a><a href="install.html">Install</a><a href="https://github.com/Over9kfpv/osd-fonts">GitHub</a></nav>
   </header>
 
-  <section class="hero">
-    <p class="eyebrow">Mixer</p>
-    <h1>Mix a font with icons</h1>
-    <p class="lede">Pick the letters from one font, the symbols from an icon set, and a boot logo. Turn on <b>Pro</b> to take each group of symbols (battery, horizon, arrows…) from a different set.</p>
+  <section class="page-head">
+    <p class="eyebrow">Mix your own</p>
+    <h1>One font, your icons</h1>
+    <p class="lede">Take the letters from any retro font and the symbols from a Betaflight icon set, add the Betaflight logo or your own. Turn on <b>Pro</b> to take battery, horizon, arrows and the rest each from a different set.</p>
   </section>
 
-  <section class="demo" aria-label="Mixer">
+  <section class="mixer" aria-label="Mixer">
     <div style="display:grid;gap:20px;min-width:0">
-      <div>
+      <div class="goggle">
+        <div class="goggle-row"><span class="goggle-brand">Live preview</span><span class="rec" aria-hidden="true"></span></div>
         <div class="screen"><canvas id="screen" aria-label="Simulated analog FPV feed showing the mixed font"></canvas></div>
-        <div class="screen-cap"><span id="cap">Loading…</span><span>PAL 30×16 grid · 4:3</span></div>
+        <div class="screen-cap"><span id="cap">Loading…</span><span>PAL 30×16 · 4:3</span></div>
+        <div class="selector">
+          <span class="lbl">Craft</span>
+          <input type="text" id="craft" maxlength="15" value="RETRO QUAD" autocomplete="off" aria-label="Craft name (preview only)" style="text-transform:uppercase">
+        </div>
       </div>
-      <div style="display:grid;gap:8px">
-        <h2>All 256 characters</h2>
-        <p class="sheet-info" id="sheet-info">Hover a character to see where it comes from.</p>
+      <div class="panel">
+        <div class="row" style="justify-content:space-between"><h3>All 256 characters</h3><span class="sheet-info" id="sheet-info">Hover a character to see where it comes from.</span></div>
         <div class="sheet-wrap"><div class="sheet" id="sheet"></div></div>
       </div>
     </div>
 
-    <div class="panel">
+    <div class="bundle">
       <div class="field">
         <label for="font">Letters from</label>
         <input type="search" id="font-search" placeholder="Filter fonts…" autocomplete="off" aria-label="Filter the font list">
         <select id="font"></select>
       </div>
       <div class="field" id="mode-field">
-        <span class="label" id="mode-label">Glyph scaling</span>
+        <span class="label" id="mode-label">Letter size</span>
         <div class="seg" role="group" aria-labelledby="mode-label">
-          <button type="button" id="mode-tall" aria-pressed="true">Tall (2× high)</button>
-          <button type="button" id="mode-small" aria-pressed="false">1:1 centred</button>
+          <button type="button" id="mode-small" aria-pressed="true">1:1 centred</button>
+          <button type="button" id="mode-tall" aria-pressed="false">Tall (2× high)</button>
         </div>
       </div>
       <div class="field">
@@ -73,28 +81,25 @@
         <p class="status" id="logo-status"></p>
       </div>
 
-      <label class="toggle"><input type="checkbox" id="pro"> Pro: pick icons per group</label>
+      <hr class="divider">
+      <label class="switch"><input type="checkbox" id="pro"> Pro: pick icons per group</label>
       <div class="pro-groups" id="pro-groups" hidden></div>
-
-      <div class="field">
-        <label for="craft">Craft name (preview only)</label>
-        <input type="text" id="craft" maxlength="15" value="RETRO QUAD" autocomplete="off" style="text-transform:uppercase">
-      </div>
+      <hr class="divider">
 
       <div class="ctas">
         <button class="btn accent" id="download" type="button">Download .mcm</button>
         <button class="btn" id="upload" type="button">Upload to FC</button>
-        <button class="btn" id="edit" type="button">Open in editor</button>
-        <button class="btn" id="share" type="button">Copy link</button>
+        <button class="btn ghost small" id="edit" type="button">Open in editor</button>
+        <button class="btn ghost small" id="share" type="button">Copy link</button>
       </div>
       <p class="status" id="status" role="status"></p>
       <p class="license" id="license"></p>
     </div>
   </section>
 
-  <footer class="foot">
-    <p>Icons and logos: Betaflight Configurator fonts, GPL-3.0. A mixed font that uses them is a derivative; share it under GPL-3.0 together with the text font's license.</p>
-    <p>Also by us: <a href="https://over9kfpv.github.io/stickbeats/">Stickbeats</a>, fun sound themes for EdgeTX radios.</p>
+  <footer class="site">
+    <p>Icons and logo: Betaflight Configurator fonts, GPL-3.0. A mixed font that uses them is a derivative; share it under GPL-3.0 together with the text font's license. Mixes are built in your browser; nothing is uploaded anywhere unless you use Upload to FC.</p>
+    <p><a href="install.html">How to install</a> · <a href="https://github.com/Over9kfpv/osd-fonts">Source on GitHub</a> · <a href="https://over9kfpv.github.io/stickbeats/">Stickbeats</a></p>
   </footer>
 </div>
 <script type="module" src="assets/mixer.js"></script>

@@ -107,21 +107,36 @@ FONT_PAGE = """<!doctype html>
 <meta property="og:image" content="{base}f/{id}.png">
 <link rel="canonical" href="{base}f/{id}.html">
 <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="../assets/style.css">
+<script>try {{ const t = localStorage.getItem("osdf-theme"); if (t) document.documentElement.dataset.theme = t }} catch (e) {{}}</script>
 </head>
 <body>
 <div class="wrap">
-  <header class="top"><a class="logo" href="../index.html">OSD Fonts</a>
-    <nav class="nav" aria-label="Main"><a href="../index.html">Browse</a><a href="../mix.html">Mix</a><a href="../editor.html">Editor</a><a href="../install.html">Install</a></nav></header>
+  <header class="top">
+    <a class="logo" href="../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="5" width="28" height="22" rx="6" fill="currentColor"/><path fill="var(--ground)" d="M13 10h6v2h-6zM11 12h2v10h-2zM19 12h2v10h-2zM13 16h6v2h-6z"/><circle cx="25.5" cy="9.5" r="1.7" fill="var(--accent)"/></svg>OSD Fonts</a>
+    <nav class="nav" aria-label="Main"><a href="../index.html#fonts">Retro fonts</a><a href="../mix.html">Mix fonts &amp; icons</a><a href="../editor.html">Font editor</a><a href="../install.html">Install</a><a href="https://github.com/Over9kfpv/osd-fonts">GitHub</a></nav>
+  </header>
   <main class="font-page">
-    <p class="eyebrow">{collection}</p>
-    <h1>{name}</h1>
-    <p class="lede">{desc}</p>
-    <img class="font-preview" src="{id}.png" width="{pw}" height="{ph}" alt="{name}: A to Z and 0 to 9 as they appear on the OSD">
-    <dl class="meta">{meta}</dl>
-    <p class="ctas"><a class="btn accent" href="../mix.html?font={id}">Mix with icons</a><a class="btn" href="../index.html#{id}">Try it on the OSD</a><a class="btn" href="../editor.html?font={id}">Open in editor</a></p>
+    <div>
+      <p class="eyebrow">{collection}</p>
+      <h1>{name}</h1>
+      <p class="lede">{desc}</p>
+      <div class="ctas"><a class="btn accent" href="../index.html#{id}">Try it on the OSD</a><a class="btn ghost" href="../mix.html?font={id}">Mix with icons →</a><a class="btn ghost" href="../editor.html?font={id}">Edit</a></div>
+    </div>
+    <div class="bundle">
+      <img class="font-preview" src="{id}.png" width="{pw}" height="{ph}" alt="{name}: A to Z and 0 to 9 as they appear on the OSD">
+      <dl class="meta">{meta}</dl>
+    </div>
   </main>
+  <footer class="site">
+    <p>Free downloads · Open source. Each font keeps its own license; icons come from Betaflight Configurator (GPL-3.0).</p>
+    <p><a href="../install.html">How to install</a> · <a href="https://github.com/Over9kfpv/osd-fonts">Source on GitHub</a> · <a href="https://over9kfpv.github.io/stickbeats/">Stickbeats</a></p>
+  </footer>
 </div>
+<script type="module" src="../assets/theme.js"></script>
 </body>
 </html>
 """
@@ -129,7 +144,7 @@ FONT_PAGE = """<!doctype html>
 
 def font_page(e, glyphs, native, png_size):
     w, h = size_of(glyphs)
-    how = "used at native size" if native else "doubled vertically to fill the 12×18 cell"
+    how = "used at native size" if native else "centred 1:1, or doubled in height if you pick Tall"
     desc = (f"{e['name']} as a Betaflight analog OSD font: {w}×{h} px letters, {how}, "
             f"with a black outline and the stock Betaflight symbols.")
     rows = [("Collection", COLLECTIONS[e["collection"]]), ("Letter size", f"{w}×{h} px"),
@@ -153,7 +168,7 @@ def main():
     for e, glyphs, score in fonts:
         native = is_native(glyphs)
         w, h = size_of(glyphs)
-        chars = build_font(glyphs, stock, "tall")
+        chars = build_font(glyphs, stock, "small")
         png = os.path.join(SITE, "f", f"{e['id']}.png")
         preview_png(chars, png)
         with open(os.path.join(SITE, "f", f"{e['id']}.html"), "w") as f:

@@ -20,12 +20,12 @@ function build() {
           <li>If you want to keep your current font, save it from Configurator's Font Manager first.</li>
         </ul>
         <p class="note" data-unsupported hidden>Uploading needs Web Serial, which only Chrome, Edge and Opera on a desktop have. Download the .mcm instead and use Configurator's Font Manager.</p>
-        <div class="row"><button value="cancel" class="btn">Cancel</button><button type="button" class="btn accent" data-go>Choose port and upload</button></div>
+        <div class="row"><button value="cancel" class="btn ghost">Cancel</button><button type="button" class="btn accent" data-go>Choose port and upload</button></div>
       </div>
       <div data-step="progress" hidden>
         <p data-status>Connecting…</p>
         <progress max="256" value="0"></progress>
-        <div class="row"><button value="close" class="btn" data-close disabled>Close</button></div>
+        <div class="row"><button value="close" class="btn ghost" data-close disabled>Close</button></div>
       </div>
     </form>`
   document.body.append(dialog)

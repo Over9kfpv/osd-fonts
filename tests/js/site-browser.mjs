@@ -57,9 +57,10 @@ await check("browse: gallery, demo and download", async (page) => {
   await page.goto(base + "index.html")
   await page.waitForSelector("#grid .card")
   assert.match(await page.textContent("#cap-font"), /IBM VGA 8x16/)
+  assert.equal(await page.getAttribute("#mode-small", "aria-pressed"), "true", "1:1 centred is the default")
   const cards = await page.locator("#grid .card").count()
   assert.ok(cards >= 30, `shortlist has ${cards} cards`)
-  await page.selectOption("#group", "all")
+  await page.click('#groups .chip[data-group="all"]')
   assert.ok((await page.locator("#grid .card").count()) >= 200)
   await page.fill("#search", "terminus")
   await page.locator("#grid .card").first().click()
@@ -68,6 +69,8 @@ await check("browse: gallery, demo and download", async (page) => {
   assert.equal(name, "terminus.mcm")
   assert.equal(font.length, 256)
   assert.notDeepEqual(font[0x41], iconset("default")[0x41], "letters come from Terminus")
+  // 1:1: Terminus letters are 7x13, so the top two rows of 'A' are empty
+  assert.ok(font[0x41].slice(0, 24).every((v) => v === 1), "1:1 glyph leaves the top rows transparent")
   assert.deepEqual(font[0x90], iconset("default")[0x90], "icons are stock")
 })
 

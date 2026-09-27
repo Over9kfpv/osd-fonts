@@ -9,25 +9,26 @@
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="assets/style.css">
+<script>try { const t = localStorage.getItem("osdf-theme"); if (t) document.documentElement.dataset.theme = t } catch (e) {}</script>
 <link rel="stylesheet" href="assets/editor.css">
 </head>
 <body>
 <div class="wrap wide">
   <header class="top">
-    <a class="logo" href="index.html"><img src="assets/icon.svg" alt="" width="28" height="28">OSD Fonts</a>
-    <nav class="nav" aria-label="Main"><a href="index.html">Browse</a><a href="mix.html">Mix fonts &amp; icons</a><a href="editor.html" aria-current="page">Editor</a><a href="install.html">Install</a><a href="https://github.com/Over9kfpv/osd-fonts">GitHub</a></nav>
+    <a class="logo" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="5" width="28" height="22" rx="6" fill="currentColor"/><path fill="var(--ground)" d="M13 10h6v2h-6zM11 12h2v10h-2zM19 12h2v10h-2zM13 16h6v2h-6z"/><circle cx="25.5" cy="9.5" r="1.7" fill="var(--accent)"/></svg>OSD Fonts</a>
+    <nav class="nav" aria-label="Main"><a href="index.html#fonts">Retro fonts</a><a href="mix.html">Mix fonts &amp; icons</a><a href="editor.html" aria-current="page">Font editor</a><a href="install.html">Install</a><a href="https://github.com/Over9kfpv/osd-fonts">GitHub</a></nav>
   </header>
 
   <div class="ed-bar">
     <h1 class="ed-title">Font editor <span id="file-name" class="muted"></span></h1>
     <div class="row">
-      <button class="btn" id="presets" type="button">Load a font…</button>
-      <label class="btn" for="open">Open file</label>
+      <button class="btn ghost small" id="presets" type="button">Load a font…</button>
+      <label class="btn ghost small" for="open">Open file</label>
       <input type="file" id="open" accept=".mcm,.h,text/plain" hidden>
-      <button class="btn" id="save-mcm" type="button">Save .mcm</button>
-      <button class="btn" id="save-h" type="button">Save .h</button>
+      <button class="btn ghost small" id="save-mcm" type="button">Save .mcm</button>
+      <button class="btn ghost small" id="save-h" type="button">Save .h</button>
       <button class="btn accent" id="upload" type="button">Upload to FC</button>
       <button class="btn danger" id="new" type="button">New (clear)</button>
     </div>
@@ -79,7 +80,7 @@
       <div class="field">
         <span class="label">Tracing overlay</span>
         <div class="row">
-          <label class="btn" for="overlay-file" style="flex:1">Choose image…</label>
+          <label class="btn ghost small" for="overlay-file" style="flex:1">Choose image…</label>
           <input type="file" id="overlay-file" accept="image/*" hidden>
         </div>
         <div id="overlay-controls" class="row" hidden>
@@ -101,10 +102,10 @@
           <div class="row" style="justify-content:space-between;align-items:center">
             <h2>Boot logo <span class="muted mono" style="font-size:12px">288×72, 0xA0–0xFF</span></h2>
             <div class="row">
-              <label class="btn" for="logo-file">Import image</label>
+              <label class="btn ghost small" for="logo-file">Import image</label>
               <input type="file" id="logo-file" accept="image/*,.bmp" hidden>
-              <button type="button" class="btn" id="logo-export">Export BMP</button>
-              <button type="button" class="btn" id="logo-edit">Edit as picture</button>
+              <button type="button" class="btn ghost small" id="logo-export">Export BMP</button>
+              <button type="button" class="btn ghost small" id="logo-edit">Edit as picture</button>
             </div>
           </div>
           <canvas id="logo" class="logo-canvas" width="288" height="72" aria-label="Boot logo assembled from characters 0xA0 to 0xFF"></canvas>
@@ -126,20 +127,20 @@
       <div class="field"><label for="preset-iconset">Betaflight font / icon set</label><select id="preset-iconset"></select></div>
       <div class="field"><label for="preset-font">Letters from (optional)</label><select id="preset-font"></select></div>
       <p class="muted">This replaces the font you're editing. Save it first if you want to keep it.</p>
-      <div class="row"><button value="cancel" class="btn">Cancel</button><button value="load" class="btn accent">Load</button></div>
+      <div class="row"><button value="cancel" class="btn ghost">Cancel</button><button value="load" class="btn accent">Load</button></div>
     </form>
   </dialog>
   <dialog id="confirm-dialog" class="upload-dialog">
     <form method="dialog">
       <h2 id="confirm-title">Are you sure?</h2>
       <p id="confirm-text" class="muted"></p>
-      <div class="row"><button value="cancel" class="btn">Cancel</button><button value="ok" class="btn danger" id="confirm-ok">OK</button></div>
+      <div class="row"><button value="cancel" class="btn ghost">Cancel</button><button value="ok" class="btn danger" id="confirm-ok">OK</button></div>
     </form>
   </dialog>
 
-  <footer class="foot">
+  <footer class="site">
     <p>Shortcuts: 1/2/3 colour, P/L/R/F tool, arrows move pixels, [ and ] previous/next character, Ctrl+Z / Ctrl+Shift+Z undo/redo, Ctrl+C / Ctrl+V copy/paste. Your work is saved in this browser automatically.</p>
-    <p>Also by us: <a href="https://over9kfpv.github.io/stickbeats/">Stickbeats</a>, fun sound themes for EdgeTX radios.</p>
+    <p><a href="install.html">How to install</a> · <a href="https://github.com/Over9kfpv/osd-fonts">Source on GitHub</a> · <a href="https://over9kfpv.github.io/stickbeats/">Stickbeats</a></p>
   </footer>
 </div>
 <script type="module" src="assets/editor.js"></script>

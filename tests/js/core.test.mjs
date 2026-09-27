@@ -49,7 +49,8 @@ const data = indexData(
 
 test("compose takes letters from the font and symbols per group", () => {
   const out = compose(data, { font, base: "a", sources: { battery: "b" } })
-  assert.deepEqual(out[65], renderGlyph(["11", "11"], "tall"))
+  assert.deepEqual(out[65], renderGlyph(["11", "11"], "small"), "1:1 centred is the default")
+  assert.deepEqual(compose(data, { font, base: "a", mode: "tall" })[65], renderGlyph(["11", "11"], "tall"))
   assert.deepEqual(out[66], stock[66], "missing letters fall back to the base set")
   assert.ok(out[0x90].every((v) => v === WHITE), "battery group from set b")
   assert.deepEqual(out[0x92], stock[0x92], "codes outside any listed group stay on the base set")

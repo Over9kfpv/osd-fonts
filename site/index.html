@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>OSD Fonts · retro fonts for Betaflight analog OSD</title>
-<meta name="description" content="230+ retro bitmap fonts for the Betaflight analog OSD: IBM PC ROM fonts, terminal fonts and demoscene charsets. Try them on a live OSD, mix them with icon sets, edit and download .mcm files.">
-<meta property="og:title" content="OSD Fonts · retro fonts for Betaflight analog OSD">
+<title>OSD Fonts · retro fonts for the Betaflight analog OSD</title>
+<meta name="description" content="230+ free retro fonts for the Betaflight analog OSD: IBM PC ROM fonts, terminal fonts and demoscene charsets. Try them on a live OSD, mix them with icon sets, edit and download .mcm files.">
+<meta property="og:title" content="OSD Fonts · retro fonts for the Betaflight analog OSD">
 <meta property="og:description" content="Try 230+ retro fonts on a live OSD, mix them with Betaflight icon sets, edit and download .mcm files.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://over9kfpv.github.io/osd-fonts/">
@@ -14,116 +14,97 @@
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="assets/style.css">
+<script>try { const t = localStorage.getItem("osdf-theme"); if (t) document.documentElement.dataset.theme = t } catch (e) {}</script>
 </head>
 <body>
 <a class="skip" href="#fonts">Skip to the fonts</a>
 <div class="wrap">
   <header class="top">
-    <a class="logo" href="index.html"><img src="assets/icon.svg" alt="" width="28" height="28">OSD Fonts</a>
-    <nav class="nav" aria-label="Main"><a href="index.html" aria-current="page">Browse</a><a href="mix.html">Mix fonts &amp; icons</a><a href="editor.html">Editor</a><a href="install.html">Install</a><a href="https://github.com/Over9kfpv/osd-fonts">GitHub</a></nav>
+    <a class="logo" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="5" width="28" height="22" rx="6" fill="currentColor"/><path fill="var(--ground)" d="M13 10h6v2h-6zM11 12h2v10h-2zM19 12h2v10h-2zM13 16h6v2h-6z"/><circle cx="25.5" cy="9.5" r="1.7" fill="var(--accent)"/></svg>OSD Fonts</a>
+    <nav class="nav" aria-label="Main"><a href="index.html#fonts" aria-current="page">Retro fonts</a><a href="mix.html">Mix fonts &amp; icons</a><a href="editor.html">Font editor</a><a href="install.html">Install</a><a href="https://github.com/Over9kfpv/osd-fonts">GitHub</a></nav>
   </header>
 
   <section class="hero">
-    <p class="eyebrow">Betaflight analog OSD · MAX7456 · 12×18 px</p>
-    <h1>Retro fonts for your OSD</h1>
-    <p class="lede"><span id="n-fonts">230+</span> free fonts from IBM PC ROMs, terminals, games and the demoscene, converted for the Betaflight analog OSD. Pick one, see it on a live feed, then mix it with an icon set or edit it pixel by pixel.</p>
-  </section>
-
-  <section class="demo" aria-label="OSD demo">
     <div>
-      <div class="screen"><canvas id="screen" aria-label="Simulated analog FPV feed with the selected font on the OSD"></canvas></div>
-      <div class="screen-cap"><span id="cap-font">Loading fonts…</span><span>PAL 30×16 grid · 4:3</span></div>
+      <p class="eyebrow">Retro fonts for the Betaflight analog OSD</p>
+      <h1>Give your OSD a <em>retro font.</em></h1>
+      <p class="lede"><b id="n-fonts">230+</b> free fonts from IBM PC ROMs, terminals, games and the demoscene. Pick one, see it on a live FPV feed, then mix it with icons or edit it pixel by pixel.</p>
+      <p class="free-note">Free downloads · Open source · Works with any MAX7456 OSD</p>
+      <div class="ctas"><a class="btn accent" href="#fonts">Browse fonts</a><a class="btn ghost" href="mix.html">Mix fonts &amp; icons →</a></div>
     </div>
-    <div class="panel">
-      <div class="field">
-        <label for="font">Font</label>
-        <select id="font"></select>
-        <div class="row">
-          <button id="prev" type="button" aria-label="Previous font">◀ Prev</button>
-          <button id="next" type="button" aria-label="Next font" style="flex:1">Next ▶</button>
-        </div>
+
+    <div class="goggle" aria-label="Try a font">
+      <div class="goggle-row"><span class="goggle-brand">Try a retro font</span><span class="rec" aria-hidden="true"></span></div>
+      <div class="screen"><canvas id="screen" aria-label="Simulated analog FPV feed with the selected font on the OSD"></canvas></div>
+      <div class="screen-cap"><span id="cap-font">Loading fonts…</span><span id="cap-meta"></span></div>
+      <div class="selector">
+        <span class="lbl">Font</span>
+        <button class="round" id="prev" type="button" aria-label="Previous font">◀</button>
+        <select id="font" aria-label="Font"></select>
+        <button class="round" id="next" type="button" aria-label="Next font">▶</button>
       </div>
-      <div class="field">
-        <span class="label" id="mode-label">Glyph scaling</span>
+      <div class="selector">
+        <span class="lbl" id="mode-label">Size</span>
         <div class="seg" role="group" aria-labelledby="mode-label">
-          <button type="button" id="mode-tall" aria-pressed="true">Tall (2× high)</button>
-          <button type="button" id="mode-small" aria-pressed="false">1:1 centred</button>
+          <button type="button" id="mode-small" aria-pressed="true">1:1 centred</button>
+          <button type="button" id="mode-tall" aria-pressed="false">Tall (2× high)</button>
         </div>
-        <p class="muted" id="mode-note" style="font-size:12px" hidden>This font is already tall enough, so it is used at its native size.</p>
       </div>
-      <div class="field">
-        <label for="craft">Craft name</label>
-        <input type="text" id="craft" maxlength="15" value="RETRO QUAD" autocomplete="off" style="text-transform:uppercase">
+      <p class="note" id="mode-note" hidden>This font is already tall enough, so it is always used at its native size.</p>
+      <div class="selector">
+        <span class="lbl">Craft</span>
+        <input type="text" id="craft" maxlength="15" value="RETRO QUAD" autocomplete="off" aria-label="Craft name" style="text-transform:uppercase">
       </div>
-      <dl class="meta">
-        <dt>Letters</dt><dd id="m-size">—</dd>
-        <dt>License</dt><dd id="m-license">—</dd>
-        <dt>Author</dt><dd id="m-author">—</dd>
-        <dt>Match</dt><dd id="m-score" title="How closely A–Z and 0–9 match the shapes of the stock Betaflight letters">—</dd>
-      </dl>
-      <div class="ctas">
-        <button class="btn accent" id="download" type="button">Download .mcm</button>
-        <a class="btn" id="to-mix" href="mix.html">Mix with icons</a>
-        <a class="btn" id="to-edit" href="editor.html">Edit</a>
-        <a class="btn" id="to-page" href="#">Font page</a>
+      <div class="keys">
+        <button class="key go" id="download" type="button">Download .mcm</button>
+        <a class="key" id="to-mix" href="mix.html">Mix with icons</a>
+        <a class="key" id="to-edit" href="editor.html">Edit</a>
+        <a class="key" id="to-page" href="#">Font page</a>
       </div>
-      <p class="muted" style="font-size:12px">The download uses the stock Betaflight icons. Use <b>Mix</b> to pick other icons or a logo.</p>
     </div>
   </section>
 
-  <section id="fonts" aria-labelledby="g-title">
-    <div class="gallery-head">
-      <div style="display:grid;gap:6px">
-        <h2 id="g-title">Fonts</h2>
-        <p class="muted" id="g-count"></p>
-      </div>
-      <div class="filters">
-        <div class="field">
-          <label for="group">Collection</label>
-          <select id="group">
-            <option value="featured">Shortlist</option>
-            <option value="pc">IBM PC ROM fonts</option>
-            <option value="vault">Terminal &amp; game fonts</option>
-            <option value="demoscene">Demoscene</option>
-            <option value="all">Everything</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="search">Search</label>
-          <input type="search" id="search" placeholder="VGA, Tandy, Terminus…" autocomplete="off">
-        </div>
-        <div class="field">
-          <label for="sort">Sort by</label>
-          <select id="sort">
-            <option value="score">Best shape match</option>
-            <option value="name">Name</option>
-          </select>
+  <section id="fonts">
+    <div class="section-head">
+      <h2>Pick a retro font</h2>
+      <div class="filters" id="groups" role="group" aria-label="Collection"></div>
+    </div>
+    <div class="tools-row">
+      <p class="note" id="g-count"></p>
+      <div class="row">
+        <label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input type="search" id="search" placeholder="VGA, Tandy, Terminus…" autocomplete="off" aria-label="Search fonts"></label>
+        <div class="seg" role="group" aria-label="Sort">
+          <button type="button" id="sort-score" aria-pressed="true">Best match</button>
+          <button type="button" id="sort-name" aria-pressed="false">A–Z</button>
         </div>
       </div>
     </div>
     <div class="grid" id="grid"></div>
   </section>
 
-  <section class="how" aria-label="About these fonts">
-    <section>
-      <h2>How they're made</h2>
-      <p class="muted">Only letters, digits and punctuation are replaced. Every OSD symbol (battery, RSSI, horizon, arrows, logo) comes from an icon set. Fonts with 8 px letters are doubled vertically; taller EGA and VGA fonts are used as they are. Every glyph gets a 1 px black outline so it stays readable over video.</p>
-    </section>
-    <section>
-      <h2>Flash a font</h2>
-      <p class="muted">Download the <code>.mcm</code> and upload it with Betaflight Configurator's Font Manager, or upload straight from the Mix page or the editor in Chrome or Edge. See <a href="install.html">Install</a>.</p>
-    </section>
-    <section>
-      <h2>Credits</h2>
-      <p class="muted">PC fonts: <a href="https://int10h.org/oldschool-pc-fonts/">The Ultimate Oldschool PC Font Pack</a> by VileR (CC BY-SA 4.0). Terminal and game fonts keep their own licenses, shown per font. Demoscene charsets come from old archives with unknown authors. Icons: Betaflight Configurator (GPL-3.0).</p>
-    </section>
+  <section class="about-strip">
+    <h2>How these fonts are made</h2>
+    <div class="cols">
+      <div class="panel">
+        <h3>Letters from the retro font</h3>
+        <p class="muted">Only letters, digits and punctuation are replaced. Every OSD symbol (battery, RSSI, horizon, arrows, logo) comes from an icon set, so nothing on your OSD breaks.</p>
+      </div>
+      <div class="panel">
+        <h3>Readable over video</h3>
+        <p class="muted">Letters are centred at 1:1 in the 12×18 cell, or doubled in height if you pick Tall. Every glyph gets a 1 px black outline, like the stock Betaflight font.</p>
+      </div>
+      <div class="panel">
+        <h3>Flash it</h3>
+        <p class="muted">Download the <code>.mcm</code> and upload it with Betaflight Configurator's Font Manager, or upload it straight from the Mix page or the editor in Chrome or Edge. See <a href="install.html">Install</a>.</p>
+      </div>
+    </div>
   </section>
 
-  <footer class="foot">
-    <p>OSD Fonts is free and open source. Code MIT; each font keeps its license. Demoscene authors: if a charset is yours and you want credit or removal, <a href="https://github.com/Over9kfpv/osd-fonts/issues">open an issue</a>.</p>
-    <p>Also by us: <a href="https://over9kfpv.github.io/stickbeats/">Stickbeats</a>, fun sound themes for EdgeTX radios.</p>
+  <footer class="site">
+    <p>Free downloads · Open source. Code: MIT. PC fonts: <a href="https://int10h.org/oldschool-pc-fonts/">The Ultimate Oldschool PC Font Pack</a> by VileR (CC BY-SA 4.0). Terminal and game fonts keep their own licenses, shown per font. Demoscene charsets have unknown authors; if one is yours, <a href="https://github.com/Over9kfpv/osd-fonts/issues">open an issue</a> for credit or removal. Icons: Betaflight Configurator (GPL-3.0).</p>
+    <p><a href="install.html">How to install</a> · <a href="https://github.com/Over9kfpv/osd-fonts">Source on GitHub</a> · <a href="https://over9kfpv.github.io/stickbeats/">Stickbeats</a></p>
   </footer>
 </div>
 <script type="module" src="assets/browse.js"></script>

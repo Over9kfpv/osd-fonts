@@ -1,3 +1,4 @@
+import "./theme.js"
 import { compose, fileName, loadData, provenance } from "./compose.js"
 import { drawLogo, fileToLogo } from "./logo.js"
 import { CH, CW, download, serializeMCM } from "./mcm.js"
@@ -12,7 +13,7 @@ const PRO_GROUPS = data.groups.filter((g) => !["text", "logo"].includes(g.id))
 const q = new URLSearchParams(location.search)
 const state = {
   font: data.fontById.get(q.get("font")) ?? data.fontById.get("ibm-vga-8x16") ?? data.fonts[0],
-  mode: q.get("mode") === "small" ? "small" : "tall",
+  mode: q.get("mode") === "tall" ? "tall" : "small",
   icons: data.iconsetById.has(q.get("icons")) ? q.get("icons") : "default",
   logo: "", // "" = the Betaflight logo every icon set shares, "custom" = uploaded image
   pro: q.get("pro") === "1",
@@ -41,7 +42,7 @@ let current = compose(data, mixOptions())
 function syncUrl() {
   const p = new URLSearchParams()
   p.set("font", state.font ? state.font.id : "none")
-  if (state.mode !== "tall") p.set("mode", state.mode)
+  if (state.mode !== "small") p.set("mode", state.mode)
   p.set("icons", state.icons)
   if (state.pro) {
     p.set("pro", "1")

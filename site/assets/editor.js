@@ -1,4 +1,5 @@
 // MAX7456 font editor. Pixel values: 0 black, 1 transparent, 2 white.
+import "./theme.js"
 import { compose, loadData } from "./compose.js"
 import { LOGO, drawLogo, fileToLogo, logoToBMP } from "./logo.js"
 import {
@@ -547,7 +548,7 @@ if (q.get("from") === "mix") {
   } catch {}
 } else if (data.fontById.has(q.get("font"))) {
   const f = data.fontById.get(q.get("font"))
-  state.font = compose(data, { font: f, mode: q.get("mode") === "small" ? "small" : "tall" })
+  state.font = compose(data, { font: f, mode: q.get("mode") === "tall" ? "tall" : "small" })
   state.name = `${f.id}.mcm`
   startMsg = `Loaded ${f.name} with the stock Betaflight icons.`
 }
