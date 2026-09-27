@@ -2,7 +2,7 @@ import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
 import { test } from "node:test"
 
-import { TEXT_CODES, compose, indexData, provenance, renderGlyph } from "../../site/assets/compose.js"
+import { TEXT_CODES, compose, indexData, licenseSummary, provenance, renderGlyph } from "../../site/assets/compose.js"
 import { LOGO, logoToBMP, rgbaToLogo } from "../../site/assets/logo.js"
 import {
   GLYPHS, TRANSPARENT, WHITE, bytesToFont, emptyFont, fontToBytes, parseH, parseMCM, serializeH, serializeMCM,
@@ -44,7 +44,7 @@ const groups = [
 const font = { id: "f", name: "F", glyphs: { 65: ["11", "11"] } }
 const data = indexData(
   { collections: {}, fonts: [font] },
-  { license: "GPL", groups, iconsets: [{ id: "a", name: "A", glyphs: pack(stock) }, { id: "b", name: "B", glyphs: white }] },
+  { groups, iconsets: [{ id: "a", name: "A", license: "GPL-3.0", glyphs: pack(stock) }, { id: "b", name: "B", license: "CC0 1.0", glyphs: white }] },
 )
 
 test("compose takes letters from the font and symbols per group", () => {
@@ -98,4 +98,13 @@ test("MSP v1 frames match Betaflight's encoding", () => {
 
 test("an empty font is fully transparent", () => {
   assert.ok(emptyFont().every((g) => g.every((v) => v === TRANSPARENT)))
+})
+
+test("license summary: public domain only when letters and every icon source are", () => {
+  const cc0Font = { ...font, license: "CC0 1.0" }
+  assert.equal(licenseSummary(data, { font: cc0Font, base: "b" }).publicDomain, true)
+  assert.equal(licenseSummary(data, { font: { ...font, license: "MIT" }, base: "b" }).publicDomain, false)
+  assert.equal(licenseSummary(data, { font: cc0Font, base: "a" }).publicDomain, false)
+  assert.equal(licenseSummary(data, { font: cc0Font, base: "b", sources: { battery: "a" } }).publicDomain, false)
+  assert.equal(licenseSummary(data, { font: cc0Font, base: "b", sources: { logo: "a" }, logo: [] }).publicDomain, true, "a custom logo replaces set a's logo")
 })

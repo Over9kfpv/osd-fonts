@@ -1,5 +1,5 @@
 import "./theme.js"
-import { compose, fileName, loadData } from "./compose.js"
+import { compose, fileName, isPublicDomain, loadData } from "./compose.js"
 import { download, serializeMCM } from "./mcm.js"
 import { OsdDemo, drawSample } from "./osd-demo.js"
 
@@ -15,13 +15,14 @@ const GROUPS = [
   ["all", "All"],
 ]
 const inGroupOf = (g, f) => g === "all" || (g === "featured" ? f.featured : f.collection === g)
-const state = { font: data.fontById.get("ibm-vga-8x16") ?? fonts[0], mode: "small", sort: "score", group: "featured", q: "" }
+const state = { font: data.fontById.get("ibm-vga-8x16") ?? fonts[0], mode: "small", sort: "score", group: "featured", q: "", icons: "default" }
 
 try {
   const saved = JSON.parse(localStorage.getItem("osdfonts.browse") || "{}")
   if (data.fontById.has(saved.font)) state.font = data.fontById.get(saved.font)
   if (saved.mode === "tall") state.mode = "tall"
   if (saved.sort === "name") state.sort = "name"
+  if (data.iconsetById.has(saved.icons)) state.icons = saved.icons
   if (GROUPS.some(([g]) => g === saved.group)) state.group = saved.group
 } catch {}
 const deepLink = decodeURIComponent(location.hash.slice(1)) || new URLSearchParams(location.search).get("font")
@@ -31,11 +32,11 @@ if (data.fontById.has(deepLink)) {
 }
 const save = () => {
   try {
-    localStorage.setItem("osdfonts.browse", JSON.stringify({ font: state.font.id, mode: state.mode, sort: state.sort, group: state.group }))
+    localStorage.setItem("osdfonts.browse", JSON.stringify({ font: state.font.id, mode: state.mode, sort: state.sort, group: state.group, icons: state.icons }))
   } catch {}
 }
 
-const composed = (font) => compose(data, { font, mode: state.mode })
+const composed = (font) => compose(data, { font, mode: state.mode, base: state.icons })
 const matches = (f) => !state.q || `${f.name} ${f.id} ${f.author ?? ""}`.toLowerCase().includes(state.q)
 const ordered = () =>
   fonts
@@ -139,7 +140,8 @@ function select(font) {
   $("cap-meta").textContent = `${font.size} px · ${font.license}`
   $("mode-note").hidden = !font.native
   $("mode-small").disabled = $("mode-tall").disabled = font.native
-  $("to-mix").href = `mix.html?font=${font.id}${state.mode === "tall" ? "&mode=tall" : ""}`
+  $("pd-note").hidden = !(isPublicDomain(font.license) && isPublicDomain(data.iconsetById.get(state.icons).license))
+  $("to-mix").href = `mix.html?font=${font.id}${state.mode === "tall" ? "&mode=tall" : ""}&icons=${state.icons}`
   $("to-edit").href = `editor.html?font=${font.id}${state.mode === "tall" ? "&mode=tall" : ""}`
   $("to-page").href = `f/${font.id}.html`
   markCurrent()
@@ -161,6 +163,14 @@ function setSort(sort) {
   refreshList()
 }
 
+for (const s of data.iconsets) $("icons").add(new Option(s.name + (isPublicDomain(s.license) ? " (public domain)" : ""), s.id))
+$("icons").value = state.icons
+$("icons").addEventListener("change", (e) => {
+  state.icons = e.target.value
+  save()
+  buildGrid()
+  select(state.font)
+})
 sel.addEventListener("change", () => select(data.fontById.get(sel.value)))
 const step = (d) => {
   const list = ordered()
@@ -180,7 +190,7 @@ $("search").addEventListener("input", (e) => {
   buildGrid()
 })
 $("download").addEventListener("click", () => {
-  const suffix = state.font.native || state.mode === "small" ? "" : "-tall"
+  const suffix = (state.font.native || state.mode === "small" ? "" : "-tall") + (state.icons === "default" ? "" : `-${state.icons}`)
   download(`${fileName(state.font.id)}${suffix}.mcm`, serializeMCM(composed(state.font)))
 })
 

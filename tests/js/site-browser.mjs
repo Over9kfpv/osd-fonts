@@ -88,7 +88,7 @@ await check("mix: whole set, then per-group Pro mode, share link", async (page) 
   assert.deepEqual(font[0xc0], iconset("default")[0xc0], "Betaflight logo")
   assert.deepEqual(
     (await page.locator("#logo option").allTextContents()).map((t) => t.trim()),
-    ["Betaflight", "Custom image (288×72)…"],
+    ["Betaflight", "OSD Fonts (CC0)", "Custom image (288×72)…"],
   )
   const url = new URL(page.url())
   assert.equal(url.searchParams.get("g.battery"), "vision")
@@ -99,6 +99,18 @@ await check("mix: whole set, then per-group Pro mode, share link", async (page) 
   const second = await downloadMcm(again, "#download")
   assert.deepEqual(second.font, font)
   await again.close()
+})
+
+await check("mix: CC0 letters + CC0 icons make a public-domain font", async (page) => {
+  await page.goto(base + "mix.html?font=public-pixel&icons=cc0")
+  await page.waitForSelector("#sheet .ch")
+  assert.equal(await page.inputValue("#logo"), "cc0", "the logo follows the CC0 icon set")
+  assert.match(await page.textContent("#license"), /public domain/)
+  const { font } = await downloadMcm(page, "#download")
+  for (const c of [0x01, 0x60, 0x90, 0xa0, 0xff]) assert.deepEqual(font[c], iconset("cc0")[c])
+  await page.selectOption("#icons", "bold")
+  assert.equal(await page.inputValue("#logo"), "default", "switching to a Betaflight set switches the logo back")
+  assert.doesNotMatch(await page.textContent("#license"), /public domain/)
 })
 
 await check("mix → editor hand-off, draw, undo, save", async (page) => {

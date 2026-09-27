@@ -142,6 +142,9 @@ input[type=range] { width: 100%; accent-color: var(--accent); }
 .goggle .seg button { color: var(--goggle-dim); }
 .goggle .seg button[aria-pressed=true] { background: var(--goggle-ink); color: var(--goggle); }
 .goggle .note { font-size: 13px; color: var(--goggle-dim); }
+.goggle .pd-note { color: #9fe3b8; font-weight: 600; }
+.license.pd { color: var(--ink); font-weight: 600; }
+.license.pd::before { content: "CC0 · "; color: #1f8f5a; }
 .goggle .keys { display: flex; flex-wrap: wrap; gap: 8px; }
 .key {
   background: var(--goggle-2); color: var(--goggle-ink); border: 1px solid rgba(255,255,255,.1); border-radius: 8px;

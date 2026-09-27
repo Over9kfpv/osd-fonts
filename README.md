@@ -7,6 +7,7 @@
 - **IBM PC ROM fonts** (167): VGA, EGA, CGA, BIOS, Tandy, Amstrad, Toshiba, Compaq…, from VileR's Ultimate Oldschool PC Font Pack
 - **Terminal & game fonts** (24): Terminus, Spleen, unscii, Cozette, GNU Unifont, ZX Spectrum, ProggyClean…
 - **CC0 collection** (45): public-domain fonts from OpenGameArt: GrafX2 fonts, Kenney's KenPixel, Public Pixel, Boxy Bold, Tom Thumb…
+- **OSD Fonts CC0 icon set**: every symbol and the logo drawn from scratch (`iconsets/make_cc0.py`), so CC0 letters + CC0 icons = a font that is public domain as a whole
 - **Demoscene charsets** (42): C64 and Amiga-era fonts from old archives
 
 The site has four pages:
@@ -65,4 +66,4 @@ npm run test:browser               # drives every page in a real browser
 Pushing to `main` runs the tests, builds the site and deploys it to GitHub Pages (`.github/workflows/pages.yml`).
 
 ## License
-Code: MIT. Fonts keep their own licenses (see `fonts/LICENSES.md`); icon sets are GPL-3.0. Also by us: [Stickbeats](https://over9kfpv.github.io/stickbeats/), sound themes for EdgeTX radios.
+Code: MIT. Fonts keep their own licenses (see `fonts/LICENSES.md`); Betaflight icon sets are GPL-3.0, the OSD Fonts CC0 icon set is public domain. Also by us: [Stickbeats](https://over9kfpv.github.io/stickbeats/), sound themes for EdgeTX radios.

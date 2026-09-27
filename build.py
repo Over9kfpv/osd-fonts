@@ -125,7 +125,7 @@ FONT_PAGE = """<!doctype html>
       <p class="eyebrow">{collection}</p>
       <h1>{name}</h1>
       <p class="lede">{desc}</p>
-      <div class="ctas"><a class="btn accent" href="../index.html#{id}">Try it on the OSD</a><a class="btn ghost" href="../mix.html?font={id}">Mix with icons →</a><a class="btn ghost" href="../editor.html?font={id}">Edit</a></div>
+      <div class="ctas"><a class="btn accent" href="../index.html#{id}">Try it on the OSD</a><a class="btn ghost" href="../mix.html?font={id}">Mix with icons →</a><a class="btn ghost" href="../editor.html?font={id}">Edit</a></div>{pd}
     </div>
     <div class="bundle">
       <img class="font-preview" src="{id}.png" width="{pw}" height="{ph}" alt="{name}: A to Z and 0 to 9 as they appear on the OSD">
@@ -152,7 +152,11 @@ def font_page(e, glyphs, native, png_size):
             ("License", e["license"]), ("Author", e.get("author") or "Unknown"),
             ("Source", f'<a href="{html.escape(e["url"])}">{html.escape(e["url"])}</a>' if e.get("url") else "—")]
     meta = "".join(f"<dt>{k}</dt><dd>{v if k == 'Source' else html.escape(v)}</dd>" for k, v in rows)
-    return FONT_PAGE.format(name=html.escape(e["name"]), desc=html.escape(desc), id=e["id"], base=BASE_URL,
+    pd = ""
+    if e["license"].startswith(("CC0", "Public domain")):
+        pd = (f'\n      <p class="lede" style="margin-top:18px">These letters are public domain. Pair them with the '
+              f'<a href="../mix.html?font={e["id"]}&amp;icons=cc0">OSD Fonts CC0 icon set</a> and the whole font is public domain too.</p>')
+    return FONT_PAGE.format(name=html.escape(e["name"]), desc=html.escape(desc), id=e["id"], base=BASE_URL, pd=pd,
                             collection=COLLECTIONS[e["collection"]], meta=meta, pw=png_size[0], ph=png_size[1])
 
 
@@ -185,9 +189,9 @@ def main():
         json.dump({"collections": COLLECTIONS, "fonts": out_fonts}, f, separators=(",", ":"))
     with open(os.path.join(SITE, "data", "iconsets.json"), "w") as f:
         json.dump({
-            "license": "GPL-3.0 (Betaflight Configurator)",
             "groups": [{k: g[k] for k in ("id", "name", "about", "codes")} for g in groups],
-            "iconsets": [{"id": s["id"], "name": s["name"], "glyphs": pack(s["chars"])} for s in iconsets],
+            "iconsets": [{"id": s["id"], "name": s["name"], "license": s["license"], "glyphs": pack(s["chars"])}
+                         for s in iconsets],
         }, f, separators=(",", ":"))
     pages = ["", "mix.html", "editor.html", "install.html"] + [f"f/{e['id']}.html" for e, _, _ in fonts]
     with open(os.path.join(SITE, "sitemap.xml"), "w") as f:

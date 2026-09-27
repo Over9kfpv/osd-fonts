@@ -63,7 +63,6 @@ export function indexData(fontData, iconData) {
     iconsetById: new Map(iconsets.map((s) => [s.id, s])),
     groups,
     groupOf,
-    iconLicense: iconData.license,
   }
 }
 
@@ -100,6 +99,30 @@ export function provenance(data, { font = null, base = "default", sources = {}, 
     if (group === "text" && sources.text) return name(sources.text)
     return name(sources[group]) ?? name(base)
   })
+}
+
+/** Public-domain licenses: a font made only from these is public domain as a whole. */
+export const isPublicDomain = (license) => /^(CC0|Public domain)/i.test(license || "")
+
+/**
+ * License of a composed font, from the text font and every icon set it draws on.
+ * Returns { publicDomain, text } where text is a sentence for the page.
+ */
+export function licenseSummary(data, { font = null, base = "default", sources = {}, logo = null }) {
+  const used = new Set([base])
+  for (const [group, id] of Object.entries(sources)) if (id && !(group === "logo" && logo)) used.add(id)
+  const sets = [...used].map((id) => data.iconsetById.get(id)).filter(Boolean)
+  const iconsPD = sets.every((s) => isPublicDomain(s.license))
+  const textPD = font ? isPublicDomain(font.license) : iconsPD
+  const letters = font ? `Letters: ${font.name}, ${font.license}${font.author ? ` (${font.author})` : ""}.` : ""
+  const icons = sets.map((s) => `${s.name} (${s.license})`).join(", ")
+  if (iconsPD && textPD) {
+    return {
+      publicDomain: true,
+      text: `This whole font is public domain (CC0): ${font ? font.name + " letters, " : ""}${sets.map((s) => s.name).join(" + ")} icons${logo ? " and your own logo" : " and logo"}. Use it for anything, no credit needed.`,
+    }
+  }
+  return { publicDomain: false, text: `${letters} Icons${logo ? "" : " and logo"}: ${icons}.`.trim() }
 }
 
 export const fileName = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "osd-font"

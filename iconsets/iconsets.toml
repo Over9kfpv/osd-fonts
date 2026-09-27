@@ -1,53 +1,69 @@
-# Icon sets: complete 256-character Betaflight fonts whose symbols (and logo) can be mixed
-# with any text font. All ten come from Betaflight Configurator, resources/osd/2/,
-# commit 7754ad4e9385a67dd302a084729c58152b6cadfe, licensed GPL-3.0.
+# Icon sets: complete 256-character fonts whose symbols (and logo) can be mixed with any text font.
+# "cc0" is drawn from scratch by make_cc0.py and is public domain. The other ten come from
+# Betaflight Configurator, resources/osd/2/, commit 7754ad4e9385a67dd302a084729c58152b6cadfe (GPL-3.0).
 
 [[iconset]]
 id = "default"
 name = "Default"
 file = "default.mcm"
+license = "GPL-3.0 (Betaflight Configurator)"
+
+[[iconset]]
+id = "cc0"
+name = "OSD Fonts CC0"
+file = "cc0.mcm"
+license = "CC0 1.0"
 
 [[iconset]]
 id = "betaflight"
 name = "Betaflight"
 file = "betaflight.mcm"
+license = "GPL-3.0 (Betaflight Configurator)"
 
 [[iconset]]
 id = "bold"
 name = "Bold"
 file = "bold.mcm"
+license = "GPL-3.0 (Betaflight Configurator)"
 
 [[iconset]]
 id = "clarity"
 name = "Clarity"
 file = "clarity.mcm"
+license = "GPL-3.0 (Betaflight Configurator)"
 
 [[iconset]]
 id = "digital"
 name = "Digital"
 file = "digital.mcm"
+license = "GPL-3.0 (Betaflight Configurator)"
 
 [[iconset]]
 id = "impact"
 name = "Impact"
 file = "impact.mcm"
+license = "GPL-3.0 (Betaflight Configurator)"
 
 [[iconset]]
 id = "impact_mini"
 name = "Impact mini"
 file = "impact_mini.mcm"
+license = "GPL-3.0 (Betaflight Configurator)"
 
 [[iconset]]
 id = "large"
 name = "Large"
 file = "large.mcm"
+license = "GPL-3.0 (Betaflight Configurator)"
 
 [[iconset]]
 id = "extra_large"
 name = "Extra large"
 file = "extra_large.mcm"
+license = "GPL-3.0 (Betaflight Configurator)"
 
 [[iconset]]
 id = "vision"
 name = "Vision"
 file = "vision.mcm"
+license = "GPL-3.0 (Betaflight Configurator)"

@@ -1,5 +1,5 @@
 import "./theme.js"
-import { compose, fileName, loadData, provenance } from "./compose.js"
+import { compose, fileName, licenseSummary, loadData, provenance } from "./compose.js"
 import { drawLogo, fileToLogo } from "./logo.js"
 import { CH, CW, download, serializeMCM } from "./mcm.js"
 import { OsdDemo, putGlyph } from "./osd-demo.js"
@@ -15,12 +15,15 @@ const state = {
   font: data.fontById.get(q.get("font")) ?? data.fontById.get("ibm-vga-8x16") ?? data.fonts[0],
   mode: q.get("mode") === "tall" ? "tall" : "small",
   icons: data.iconsetById.has(q.get("icons")) ? q.get("icons") : "default",
-  logo: "", // "" = the Betaflight logo every icon set shares, "custom" = uploaded image
+  logo: "", // "default" = Betaflight logo, "cc0" = OSD Fonts CC0 logo, "custom" = uploaded image
   pro: q.get("pro") === "1",
   groups: {}, // groupId -> iconset id ("" = same as icons)
   customLogo: null,
 }
 if (q.get("font") === "none") state.font = null
+// Logo follows the icon set (Betaflight sets share one logo; the CC0 set has its own) unless chosen.
+const matchingLogo = (icons) => (icons === "cc0" ? "cc0" : "default")
+state.logo = ["default", "cc0"].includes(q.get("logo")) ? q.get("logo") : matchingLogo(state.icons)
 for (const g of PRO_GROUPS) {
   const v = q.get(`g.${g.id}`)
   if (data.iconsetById.has(v)) state.groups[g.id] = v
@@ -29,6 +32,7 @@ for (const g of PRO_GROUPS) {
 function mixOptions() {
   const sources = {}
   if (state.pro) Object.assign(sources, Object.fromEntries(Object.entries(state.groups).filter(([, v]) => v)))
+  if (state.logo !== "custom") sources.logo = state.logo
   return {
     font: state.font,
     mode: state.mode,
@@ -44,6 +48,7 @@ function syncUrl() {
   p.set("font", state.font ? state.font.id : "none")
   if (state.mode !== "small") p.set("mode", state.mode)
   p.set("icons", state.icons)
+  if (state.logo !== "custom" && state.logo !== matchingLogo(state.icons)) p.set("logo", state.logo)
   if (state.pro) {
     p.set("pro", "1")
     for (const [k, v] of Object.entries(state.groups)) if (v) p.set(`g.${k}`, v)
@@ -74,7 +79,8 @@ const setOptions = (sel, first) => {
   for (const s of data.iconsets) sel.add(new Option(s.name, s.id))
 }
 setOptions($("icons"))
-$("logo").add(new Option("Betaflight", ""))
+$("logo").add(new Option("Betaflight", "default"))
+$("logo").add(new Option("OSD Fonts (CC0)", "cc0"))
 $("logo").add(new Option("Custom image (288×72)…", "custom"))
 
 const proBox = $("pro-groups")
@@ -150,8 +156,9 @@ function update() {
   const native = !state.font || state.font.native
   $("mode-field").style.opacity = native ? 0.45 : 1
   $("mode-tall").disabled = $("mode-small").disabled = native
-  const fontLic = state.font ? `Letters: ${state.font.name}, ${state.font.license}${state.font.author ? " (" + state.font.author + ")" : ""}. ` : ""
-  $("license").textContent = `${fontLic}Icons and logo: ${data.iconLicense}.`
+  const lic = licenseSummary(data, mixOptions())
+  $("license").textContent = lic.text
+  $("license").classList.toggle("pd", lic.publicDomain)
   syncUrl()
 }
 
@@ -169,6 +176,8 @@ for (const m of ["tall", "small"]) {
   })
 }
 $("icons").addEventListener("change", (e) => {
+  if (state.logo === matchingLogo(state.icons)) state.logo = matchingLogo(e.target.value)
+  $("logo").value = state.logo
   state.icons = e.target.value
   update()
 })

@@ -28,7 +28,9 @@ Fonts and icon sets are NOT covered by the MIT license; each keeps its own:
 - fonts/vault/<id>/  per-font licenses, listed in each folder's README.md and in fonts/catalog.toml
 - fonts/cc0/         OpenGameArt fonts, CC0 1.0 (public domain); see fonts/cc0/README.md
 - fonts/demoscene/   unknown authors; see fonts/LICENSES.md
-- iconsets/          Betaflight Configurator fonts, GPL-3.0
+- iconsets/cc0.mcm   drawn for this project by iconsets/make_cc0.py, CC0 1.0 (public domain)
+- iconsets/*.mcm     all other icon sets: Betaflight Configurator fonts, GPL-3.0
 
-Fonts made from these sources carry the source's license (for text) plus
-GPL-3.0 (for Betaflight icons and logos).
+Fonts made from these sources carry the source's license (for text) plus the icon set's license:
+GPL-3.0 for Betaflight icons and logos, CC0 for the OSD Fonts CC0 set. CC0 letters with CC0 icons
+make a font that is public domain as a whole.
