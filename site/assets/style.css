@@ -255,8 +255,8 @@ input[type=range] { width: 100%; accent-color: var(--accent); }
 .prose .muted { color: var(--muted); }
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 16px; }
 .steps { counter-reset: s; list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
-.steps li { counter-increment: s; display: grid; grid-template-columns: 36px 1fr; gap: 12px; }
-.steps li::before { content: counter(s); width: 30px; height: 30px; border-radius: 50%; background: var(--ink); color: var(--ground); display: grid; place-items: center; font: 700 14px var(--mono); }
+.steps li { counter-increment: s; position: relative; padding-left: 48px; padding-block: max(0px, (30px - 1lh) / 2); }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--ink); color: var(--ground); display: grid; place-items: center; font: 700 14px var(--mono); }
 .tips { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 .about-strip { border-top: 2px solid var(--line); margin-top: 56px; padding-top: 32px; display: grid; gap: 22px; }
 .about-strip h2 { font-size: clamp(28px, 3.6vw, 44px); letter-spacing: -.03em; }
