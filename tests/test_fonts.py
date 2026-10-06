@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 
 import numpy as np
 import pytest
@@ -133,20 +134,22 @@ def test_render_fixture_is_current():
     assert json.load(open(path)) == cases
 
 
-def test_cc0_iconset_is_current_and_original():
-    """cc0.mcm is exactly what make_cc0.py draws, and no symbol copies a Betaflight glyph."""
+@pytest.mark.parametrize("name", ["cc0", "kenney"])
+def test_cc0_iconsets_are_current_and_original(name):
+    """The saved .mcm is exactly what its make_*.py builds, and no symbol copies a Betaflight glyph."""
     import importlib.util
 
-    spec = importlib.util.spec_from_file_location("make_cc0", os.path.join(ROOT, "iconsets", "make_cc0.py"))
+    sys.path.insert(0, os.path.join(ROOT, "iconsets"))
+    spec = importlib.util.spec_from_file_location(f"make_{name}", os.path.join(ROOT, "iconsets", f"make_{name}.py"))
     make = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(make)
     drawn = make.build()
-    saved = read_mcm(os.path.join(ROOT, "iconsets", "cc0.mcm"))
-    assert all(np.array_equal(a, b) for a, b in zip(drawn, saved)), "run: uv run iconsets/make_cc0.py"
+    saved = read_mcm(os.path.join(ROOT, "iconsets", f"{name}.mcm"))
+    assert all(np.array_equal(a, b) for a, b in zip(drawn, saved)), f"run: uv run iconsets/make_{name}.py"
 
     betaflight = set()
     for s in build.load_iconsets():
-        if s["id"] != "cc0":
+        if not s["license"].startswith("CC0"):
             betaflight |= {c.tobytes() for c in s["chars"]}
     text = set(TEXT_CODES)
     blank = np.full((CH, CW), 1, np.uint8).tobytes()

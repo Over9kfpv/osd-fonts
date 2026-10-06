@@ -17,15 +17,16 @@ const state = {
   mode: q.get("mode") === "tall" ? "tall" : "small",
   effect: normalizeEffect({ style: q.get("fx") ?? "outline", dir: q.get("dir") ?? "se", invert: q.get("inv") === "1" }),
   icons: data.iconsetById.has(q.get("icons")) ? q.get("icons") : "default",
-  logo: "", // "default" = Betaflight logo, "cc0" = OSD Fonts CC0 logo, "custom" = uploaded image
+  logo: "", // "default" = Betaflight logo, "cc0"/"kenney" = that CC0 set's logo, "custom" = uploaded image
   pro: q.get("pro") === "1",
   groups: {}, // groupId -> iconset id ("" = same as icons)
   customLogo: null,
 }
 if (q.get("font") === "none") state.font = null
-// Logo follows the icon set (Betaflight sets share one logo; the CC0 set has its own) unless chosen.
-const matchingLogo = (icons) => (icons === "cc0" ? "cc0" : "default")
-state.logo = ["default", "cc0"].includes(q.get("logo")) ? q.get("logo") : matchingLogo(state.icons)
+// Logo follows the icon set (Betaflight sets share one logo; the CC0 sets have their own) unless chosen.
+const OWN_LOGO = ["cc0", "kenney"]
+const matchingLogo = (icons) => (OWN_LOGO.includes(icons) ? icons : "default")
+state.logo = ["default", ...OWN_LOGO].includes(q.get("logo")) ? q.get("logo") : matchingLogo(state.icons)
 for (const g of PRO_GROUPS) {
   const v = q.get(`g.${g.id}`)
   if (data.iconsetById.has(v)) state.groups[g.id] = v
@@ -87,6 +88,7 @@ const setOptions = (sel, first) => {
 setOptions($("icons"))
 $("logo").add(new Option("Betaflight", "default"))
 $("logo").add(new Option("OSD Fonts (CC0)", "cc0"))
+$("logo").add(new Option("Kenney 1-Bit (CC0)", "kenney"))
 $("logo").add(new Option("Custom image (288×72)…", "custom"))
 
 const proBox = $("pro-groups")

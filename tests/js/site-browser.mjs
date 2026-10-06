@@ -103,7 +103,7 @@ await check("mix: whole set, then per-group Pro mode, share link", async (page) 
   assert.deepEqual(font[0xc0], iconset("default")[0xc0], "Betaflight logo")
   assert.deepEqual(
     (await page.locator("#logo option").allTextContents()).map((t) => t.trim()),
-    ["Betaflight", "OSD Fonts (CC0)", "Custom image (288×72)…"],
+    ["Betaflight", "OSD Fonts (CC0)", "Kenney 1-Bit (CC0)", "Custom image (288×72)…"],
   )
   const url = new URL(page.url())
   assert.equal(url.searchParams.get("g.battery"), "vision")

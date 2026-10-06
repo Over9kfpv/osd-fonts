@@ -1,5 +1,6 @@
 # Icon sets: complete 256-character fonts whose symbols (and logo) can be mixed with any text font.
-# "cc0" is drawn from scratch by make_cc0.py and is public domain. The other ten come from
+# "cc0" is drawn from scratch by make_cc0.py and is public domain. "kenney" is built from Kenney's
+# 1-Bit Pack by make_kenney.py (CC0 1.0). The other ten come from
 # Betaflight Configurator, resources/osd/2/, commit 7754ad4e9385a67dd302a084729c58152b6cadfe (GPL-3.0).
 
 [[iconset]]
@@ -13,6 +14,12 @@ id = "cc0"
 name = "OSD Fonts CC0"
 file = "cc0.mcm"
 license = "CC0 1.0"
+
+[[iconset]]
+id = "kenney"
+name = "Kenney 1-Bit"
+file = "kenney.mcm"
+license = "CC0 1.0 (Kenney)"
 
 [[iconset]]
 id = "betaflight"
