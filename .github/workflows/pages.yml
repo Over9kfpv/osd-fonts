@@ -1,9 +1,11 @@
-name: Build and deploy site
+name: Redirect to rotordeck.com
+
+# This repository moved to rotordeck/osd-fonts. Pages now only serves redirects
+# to https://rotordeck.com/osd-fonts/, keeping the path of old links.
 
 on:
   push:
     branches: [main]
-  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -12,56 +14,32 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-${{ github.ref }}
+  group: pages
   cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10.2.0
-      - name: Build site data
-        run: uv run build.py
-      - uses: actions/upload-artifact@v7
-        with:
-          name: site
-          path: site
-      - uses: actions/configure-pages@v6
-        if: github.ref == 'refs/heads/main'
-      - uses: actions/upload-pages-artifact@v5
-        if: github.ref == 'refs/heads/main'
-        with:
-          path: site
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10.2.0
-      - name: Python tests (converters, catalog rules, symbol groups)
-        run: uv run pytest -q
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 22
-          cache: npm
-      - name: JavaScript tests
-        run: |
-          npm ci
-          npm test
-      - name: Browser tests
-        run: |
-          uv run build.py
-          npx playwright install --with-deps chromium
-          npm run test:browser
-
   deploy:
-    if: github.ref == 'refs/heads/main'
-    needs: [build, test]
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Write redirect pages
+        run: |
+          mkdir -p _site
+          cat > _site/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en"><head><meta charset="utf-8">
+          <title>Moved to rotordeck.com</title>
+          <meta name="robots" content="noindex">
+          <link rel="canonical" href="https://rotordeck.com/osd-fonts/">
+          <script>location.replace("https://rotordeck.com/osd-fonts/"+location.pathname.replace(/^\/osd-fonts\/?/,"")+location.search+location.hash)</script>
+          <meta http-equiv="refresh" content="0; url=https://rotordeck.com/osd-fonts/">
+          </head><body><p>This app moved to <a href="https://rotordeck.com/osd-fonts/">rotordeck.com/osd-fonts</a>.</p></body></html>
+          HTML
+          cp _site/index.html _site/404.html
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
       - id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4
