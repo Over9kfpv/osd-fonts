@@ -1,3 +1,5 @@
+> **Development has moved to [rotordeck/osd-fonts](https://github.com/rotordeck/osd-fonts).** New work, issues and releases happen there, and the app is now at <https://rotordeck.com/osd-fonts/>. This repository is kept as-is.
+
 # OSD Fonts: retro fonts for the Betaflight analog OSD
 
 **Site:** https://over9kfpv.github.io/osd-fonts/
